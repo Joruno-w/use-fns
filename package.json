@@ -1,0 +1,61 @@
+{
+  "name": "use-fns",
+  "type": "module",
+  "version": "1.0.1",
+  "packageManager": "pnpm@7.9.0",
+  "description": "",
+  "author": "Joruno-w <1710642275@qq.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Joruno-w/use-fns#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joruno-w/use-fns.git"
+  },
+  "bugs": "https://github.com/Joruno-w/use-fns/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "pub": "npm publish"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.5",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.22.0",
+    "esno": "^0.16.3",
+    "pnpm": "^7.9.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.7.4",
+    "unbuild": "^0.8.8",
+    "urpm": "^0.0.4",
+    "vite": "^3.0.7",
+    "vitest": "^0.22.0"
+  }
+}
