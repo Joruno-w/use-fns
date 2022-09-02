@@ -125,7 +125,7 @@ export const useScrollToTop = () => {
 };
 
 // 滚动到元素位置
-export const smoothScroll = (selector: QuerySelector) => {
+export const useSmoothScroll = (selector: QuerySelector) => {
   const ele = document.querySelector(selector) || document.body;
   ele.scrollIntoView({
     behavior: "smooth",
@@ -134,7 +134,7 @@ export const smoothScroll = (selector: QuerySelector) => {
 
 // uuid
 // 作用不大，基本上是后端生成...
-export const uuid = () => {
+export const useUUID = () => {
   const temp_url = URL.createObjectURL(new Blob());
   const uuid = temp_url.toString();
   URL.revokeObjectURL(temp_url); //释放这个url
