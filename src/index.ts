@@ -1,4 +1,5 @@
 import type { Ele, Doc, QuerySelector } from "./types";
+
 // 判断变量类型
 export const useTypeOf = function (obj: any) {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
