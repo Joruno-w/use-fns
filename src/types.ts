@@ -12,4 +12,14 @@ export interface Doc extends Document {
   webkitExitFullscreen?: (options?: FullscreenOptions) => Promise<void>;
 }
 
-export type QuerySelector = string | keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap
+export type QuerySelector =
+  | string
+  | keyof HTMLElementTagNameMap
+  | keyof SVGElementTagNameMap;
+
+export interface MoneyFormatParams {
+  number: number;
+  decimals?: number;
+  dec_point?: string;
+  thousands_sep?: string;
+}

@@ -1,4 +1,4 @@
-import type { Ele, Doc, QuerySelector } from "./types";
+import type { Doc, Ele, QuerySelector, MoneyFormatParams } from "./types";
 
 // 判断变量类型
 export const useTypeOf = function (obj: any) {
@@ -140,4 +140,111 @@ export const useUUID = () => {
   const uuid = temp_url.toString();
   URL.revokeObjectURL(temp_url); //释放这个url
   return uuid.substring(uuid.lastIndexOf("/") + 1);
+};
+
+// number：要格式化的数字
+// decimals：保留几位小数
+// dec_point：小数点符号
+// thousands_sep：千分位符号
+export const useMoneyFormat = ({
+  number,
+  decimals = 2,
+  dec_point: dec = ".",
+  thousands_sep: sep = ",",
+}: MoneyFormatParams): string => {
+  number = +(number + "").replace(/[^0-9+-Ee.]/g, "");
+  const n = !isFinite(number) ? 0 : +number;
+  const prec = !isFinite(decimals) ? 2 : Math.abs(decimals);
+  let s;
+  const toFixedFix = function (n: number, prec: number) {
+    const k = Math.pow(10, prec);
+    return "" + Math.ceil(n * k) / k;
+  };
+  s = (prec ? toFixedFix(n, prec) : "" + Math.round(n)).split(".");
+  const reg = /(-?\d+)(\d{3})/;
+  while (reg.test(s[0])) {
+    s[0] = s[0].replace(reg, "$1" + sep + "$2");
+  }
+
+  if ((s[1] || "").length < prec) {
+    s[1] = s[1] || "";
+    s[1] += new Array(prec - s[1].length + 1).join("0");
+  }
+  return s.join(dec);
+};
+
+// 存储操作
+class MyCache {
+  private storage: Storage;
+  constructor(isLocal = true) {
+    this.storage = isLocal ? localStorage : sessionStorage;
+  }
+
+  setItem(key: string, value: unknown) {
+    if (typeof value === "object" && value !== null)
+      value = JSON.stringify(value);
+    this.storage.setItem(key, value as string);
+  }
+
+  getItem(key: string) {
+    try {
+      return JSON.parse(this.storage.getItem(key) as string);
+    } catch (err) {
+      return this.storage.getItem(key);
+    }
+  }
+
+  removeItem(key: string) {
+    this.storage.removeItem(key);
+  }
+
+  clear() {
+    this.storage.clear();
+  }
+
+  key(index: number) {
+    return this.storage.key(index);
+  }
+
+  length() {
+    return this.storage.length;
+  }
+}
+
+const useLocalCache = new MyCache();
+const useSessionCache = new MyCache(false);
+
+export { useLocalCache, useSessionCache };
+
+// 模糊搜索
+// list 原数组
+// keyWord 查询的关键词
+// attribute 数组需要检索属性
+export const useFuzzyQuery = <T extends Record<keyof any, any>, K extends keyof T>(
+  list: T[],
+  keyWord: string,
+  attr: K
+) => {
+  const reg = new RegExp(keyWord);
+  return list.reduce(
+    (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
+    [] as unknown[]
+  );
+};
+
+// 遍历树节点
+export const useForeachTree = <
+  T extends Record<keyof any, any>,
+  K extends keyof T
+>(
+  data: T[],
+  cb: Function,
+  childrenName: K
+) => {
+  for (let i = 0; i < data.length; i++) {
+    cb(data[i]);
+    data[i][childrenName] &&
+      data[i][childrenName].length > 0 &&
+      useForeachTree(data[i][childrenName], cb, childrenName);
+  }
 };

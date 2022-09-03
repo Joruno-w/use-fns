@@ -5,6 +5,12 @@ interface Ele extends Element {
     webkitRequestFullscreen?: (options?: FullscreenOptions) => Promise<void>;
 }
 declare type QuerySelector = string | keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap;
+interface MoneyFormatParams {
+    number: number;
+    decimals?: number;
+    dec_point?: string;
+    thousands_sep?: string;
+}
 
 declare const useTypeOf: (obj: any) => string;
 declare const useDebounce: (cb: () => void, wait?: number) => void;
@@ -19,5 +25,21 @@ declare const useUniqueArrObj: <T extends Record<string | number | symbol, any>,
 declare const useScrollToTop: () => void;
 declare const useSmoothScroll: (selector: QuerySelector) => void;
 declare const useUUID: () => string;
+declare const useMoneyFormat: ({ number, decimals, dec_point: dec, thousands_sep: sep, }: MoneyFormatParams) => string;
+declare class MyCache {
+    private storage;
+    constructor(isLocal?: boolean);
+    setItem(key: string, value: unknown): void;
+    getItem(key: string): any;
+    removeItem(key: string): void;
+    clear(): void;
+    key(index: number): string | null;
+    length(): number;
+}
+declare const useLocalCache: MyCache;
+declare const useSessionCache: MyCache;
 
-export { useDebounce, useExitFullscreen, useHideMobile, useLaunchFullscreen, useScrollToTop, useSearchParams, useSmoothScroll, useSysType, useThrottle, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+declare const useFuzzyQuery: <T extends Record<string | number | symbol, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
+declare const useForeachTree: <T extends Record<string | number | symbol, any>, K extends keyof T>(data: T[], cb: Function, childrenName: K) => void;
+
+export { useDebounce, useExitFullscreen, useForeachTree, useFuzzyQuery, useHideMobile, useLaunchFullscreen, useLocalCache, useMoneyFormat, useScrollToTop, useSearchParams, useSessionCache, useSmoothScroll, useSysType, useThrottle, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

@@ -1,7 +1,7 @@
 # use-fns
 Some utility functions prefixed with use
 
-[![NPM version](https://img.shields.io/badge/npm-1.0.4-brightgreen)](https://www.npmjs.com/package/use-fns)
+[![NPM version](https://img.shields.io/badge/npm-1.0.5-brightgreen)](https://www.npmjs.com/package/use-fns)
 
 ## License
 
