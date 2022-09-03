@@ -2,7 +2,7 @@
   "name": "use-fns",
   "type": "module",
   "version": "1.0.2",
-  "packageManager": "pnpm@7.9.0",
+  "packageManager": "pnpm@7.9.5",
   "description": "",
   "author": "Joruno-w <1710642275@qq.com>",
   "license": "MIT",
@@ -12,7 +12,21 @@
     "url": "git+https://github.com/Joruno-w/use-fns.git"
   },
   "bugs": "https://github.com/Joruno-w/use-fns/issues",
-  "keywords": [],
+  "keywords": [
+    "use",
+    "fn",
+    "fns",
+    "function",
+    "func",
+    "funcs",
+    "usehook",
+    "usehooks",
+    "hook",
+    "hooks",
+    "util",
+    "utils",
+    "utility"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
