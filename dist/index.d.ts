@@ -17,7 +17,7 @@ declare const useSearchParams: () => Record<string, string>;
 declare const useSysType: () => "ios" | "android" | "";
 declare const useUniqueArrObj: <T extends Record<string | number | symbol, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
 declare const useScrollToTop: () => void;
-declare const smoothScroll: (selector: QuerySelector) => void;
-declare const uuid: () => string;
+declare const useSmoothScroll: (selector: QuerySelector) => void;
+declare const useUUID: () => string;
 
-export { smoothScroll, useDebounce, useExitFullscreen, useHideMobile, useLaunchFullscreen, useScrollToTop, useSearchParams, useSysType, useThrottle, useTurnCase, useTypeOf, useUniqueArrObj, uuid };
+export { useDebounce, useExitFullscreen, useHideMobile, useLaunchFullscreen, useScrollToTop, useSearchParams, useSmoothScroll, useSysType, useThrottle, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

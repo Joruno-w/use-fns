@@ -98,29 +98,29 @@ const useScrollToTop = () => {
     window.scrollTo(0, height - height / 8);
   }
 };
-const smoothScroll = (selector) => {
+const useSmoothScroll = (selector) => {
   const ele = document.querySelector(selector) || document.body;
   ele.scrollIntoView({
     behavior: "smooth"
   });
 };
-const uuid = () => {
+const useUUID = () => {
   const temp_url = URL.createObjectURL(new Blob());
-  const uuid2 = temp_url.toString();
+  const uuid = temp_url.toString();
   URL.revokeObjectURL(temp_url);
-  return uuid2.substring(uuid2.lastIndexOf("/") + 1);
+  return uuid.substring(uuid.lastIndexOf("/") + 1);
 };
 
-exports.smoothScroll = smoothScroll;
 exports.useDebounce = useDebounce;
 exports.useExitFullscreen = useExitFullscreen;
 exports.useHideMobile = useHideMobile;
 exports.useLaunchFullscreen = useLaunchFullscreen;
 exports.useScrollToTop = useScrollToTop;
 exports.useSearchParams = useSearchParams;
+exports.useSmoothScroll = useSmoothScroll;
 exports.useSysType = useSysType;
 exports.useThrottle = useThrottle;
 exports.useTurnCase = useTurnCase;
 exports.useTypeOf = useTypeOf;
+exports.useUUID = useUUID;
 exports.useUniqueArrObj = useUniqueArrObj;
-exports.uuid = uuid;

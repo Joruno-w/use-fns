@@ -7,7 +7,7 @@ export const useTypeOf = function (obj: any) {
 
 // 防抖
 export const useDebounce = (() => {
-  let timer: number;
+  let timer: NodeJS.Timeout;
   return (cb: () => void, wait = 500) => {
     timer && clearTimeout(timer);
     timer = setTimeout(cb, wait);
