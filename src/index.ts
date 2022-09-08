@@ -1,12 +1,12 @@
-import type { Doc, Ele, QuerySelector, MoneyFormatParams } from "./types";
+import type { NormalKeys,Doc, Ele, QuerySelector, MoneyFormatParams } from "./types";
 
 // 判断变量类型
-export const useTypeOf = function (obj: any) {
+const useTypeOf = function (obj: any) {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
 
 // 防抖
-export const useDebounce = (() => {
+const useDebounce = (() => {
   let timer: NodeJS.Timeout;
   return (cb: () => void, wait = 500) => {
     timer && clearTimeout(timer);
@@ -15,7 +15,7 @@ export const useDebounce = (() => {
 })();
 
 // 节流
-export const useThrottle = (() => {
+const useThrottle = (() => {
   let last: number = 0;
   return (cb: () => void, wait = 500) => {
     let now = +new Date();
@@ -27,12 +27,12 @@ export const useThrottle = (() => {
 })();
 
 // 手机号脱敏
-export const useHideMobile = (mobile: string) => {
+const useHideMobile = (mobile: string) => {
   return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2");
 };
 
 // 开启全屏
-export const useLaunchFullscreen = (element: Ele) => {
+const useLaunchFullscreen = (element: Ele) => {
   if (element.requestFullscreen) {
     element.requestFullscreen();
   } else if (element.mozRequestFullscreen) {
@@ -45,7 +45,7 @@ export const useLaunchFullscreen = (element: Ele) => {
 };
 
 // 关闭全屏
-export const useExitFullscreen = () => {
+const useExitFullscreen = () => {
   const doc: Doc = document;
   if (doc.exitFullscreen) {
     doc.exitFullscreen();
@@ -59,7 +59,7 @@ export const useExitFullscreen = () => {
 };
 
 // 全部大写/全部小写/首字母大写
-export const useTurnCase = (str: string, type: number) => {
+const useTurnCase = (str: string, type: number) => {
   switch (type) {
     case 1:
       return str.toUpperCase();
@@ -73,7 +73,7 @@ export const useTurnCase = (str: string, type: number) => {
 };
 
 // 解析URL参数
-export const useSearchParams = () => {
+const useSearchParams = () => {
   const searchParams: URLSearchParams = new URLSearchParams(
     window.location.search
   );
@@ -85,7 +85,7 @@ export const useSearchParams = () => {
 };
 
 // 判断端环境
-export const useSysType = () => {
+const useSysType = () => {
   const u = navigator.userAgent;
   const isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
   const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
@@ -101,8 +101,8 @@ export const useSysType = () => {
 // 数组对象根据字段去重
 // arr 要去重的数组
 // key 根据去重的字段名
-export const useUniqueArrObj = <
-  T extends Record<keyof any, any>,
+const useUniqueArrObj = <
+  T extends Record<NormalKeys, any>,
   U extends T[]
 >(
   arr: U,
@@ -117,7 +117,7 @@ export const useUniqueArrObj = <
 };
 
 // 滚动到页面顶部
-export const useScrollToTop = () => {
+const useScrollToTop = () => {
   const height = document.documentElement.scrollTop || document.body.scrollTop;
   if (height > 0) {
     window.requestAnimationFrame(useScrollToTop);
@@ -126,7 +126,7 @@ export const useScrollToTop = () => {
 };
 
 // 滚动到元素位置
-export const useSmoothScroll = (selector: QuerySelector) => {
+const useSmoothScroll = (selector: QuerySelector) => {
   const ele = document.querySelector(selector) || document.body;
   ele.scrollIntoView({
     behavior: "smooth",
@@ -135,7 +135,7 @@ export const useSmoothScroll = (selector: QuerySelector) => {
 
 // uuid
 // 作用不大，基本上是后端生成...
-export const useUUID = () => {
+const useUUID = () => {
   const temp_url = URL.createObjectURL(new Blob());
   const uuid = temp_url.toString();
   URL.revokeObjectURL(temp_url); //释放这个url
@@ -146,7 +146,7 @@ export const useUUID = () => {
 // decimals：保留几位小数
 // dec_point：小数点符号
 // thousands_sep：千分位符号
-export const useMoneyFormat = ({
+const useMoneyFormat = ({
   number,
   decimals = 2,
   dec_point: dec = ".",
@@ -214,13 +214,12 @@ class MyCache {
 const useLocalCache = new MyCache();
 const useSessionCache = new MyCache(false);
 
-export { useLocalCache, useSessionCache };
 
 // 模糊搜索
 // list 原数组
 // keyWord 查询的关键词
 // attribute 数组需要检索属性
-export const useFuzzyQuery = <T extends Record<keyof any, any>, K extends keyof T>(
+const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
   list: T[],
   keyWord: string,
   attr: K
@@ -233,8 +232,8 @@ export const useFuzzyQuery = <T extends Record<keyof any, any>, K extends keyof 
 };
 
 // 遍历树节点
-export const useForeachTree = <
-  T extends Record<keyof any, any>,
+const useForeachTree = <
+  T extends Record<NormalKeys, any>,
   K extends keyof T
 >(
   data: T[],
@@ -248,3 +247,71 @@ export const useForeachTree = <
       useForeachTree(data[i][childrenName], cb, childrenName);
   }
 };
+
+
+// 获取字符串中的字符数
+const useCharacterCount = (str: string, char: string) => str.split(char).length - 1
+
+// 检查对象是否为空
+const useIsEmptyObj = <T extends Record<NormalKeys,any>>(obj: T) => Reflect.ownKeys(obj).length === 0 && obj.constructor === Object
+
+// 等待一段时间再执行
+const useDelay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// 获取两个日期之间的日差
+const useDaysBetween = (d1: number, d2: number) => Math.ceil(Math.abs(d1 - d2) / (1000 * 60 * 60 * 24))
+
+// 重定向到另一个 URL
+const useRedirect = (url: string) => location.href = url
+
+// 检查设备上的触摸支持
+// @ts-ignore
+const useTouchSupported = () => ('ontouchstart' in window || DocumentTouch && document instanceof DocumentTouch)
+
+// 在元素后插入 HTML 字符串
+const useInsertHTMLAfter = (html: string, el: Element) => el.insertAdjacentHTML('afterend', html)
+
+// 随机排列数组
+const useShuffle = (arr: any[]) => arr.sort(() => Math.random() - .5)
+
+// 在网页上获取选定的文本
+const useGetSelectedText = () => window.getSelection()?.toString() ?? ''
+
+// 获取随机布尔值
+const useGetRandomBoolean = () => Math.random() >= 0.5
+
+// 计算数组的平均值
+const useAverage = (arr: any[]) => arr.reduce((a, b) => a + b) / arr.length
+
+
+export {
+  useTypeOf,
+  useDebounce,
+  useThrottle,
+  useHideMobile,
+  useLaunchFullscreen,
+  useExitFullscreen,
+  useTurnCase,
+  useSearchParams,
+  useSysType,
+  useUniqueArrObj,
+  useScrollToTop,
+  useSmoothScroll,
+  useUUID,
+  useMoneyFormat,
+  useLocalCache,
+  useSessionCache,
+  useFuzzyQuery,
+  useForeachTree,
+  useCharacterCount,
+  useIsEmptyObj,
+  useDelay,
+  useDaysBetween,
+  useRedirect,
+  useTouchSupported,
+  useInsertHTMLAfter,
+  useShuffle,
+  useGetSelectedText,
+  useGetRandomBoolean,
+  useAverage
+}
