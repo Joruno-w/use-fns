@@ -175,5 +175,16 @@ const useForeachTree = (data, cb, childrenName) => {
     data[i][childrenName] && data[i][childrenName].length > 0 && useForeachTree(data[i][childrenName], cb, childrenName);
   }
 };
+const useCharacterCount = (str, char) => str.split(char).length - 1;
+const useIsEmptyObj = (obj) => Reflect.ownKeys(obj).length === 0 && obj.constructor === Object;
+const useDelay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const useDaysBetween = (d1, d2) => Math.ceil(Math.abs(d1 - d2) / (1e3 * 60 * 60 * 24));
+const useRedirect = (url) => location.href = url;
+const useTouchSupported = () => "ontouchstart" in window || DocumentTouch && document instanceof DocumentTouch;
+const useInsertHTMLAfter = (html, el) => el.insertAdjacentHTML("afterend", html);
+const useShuffle = (arr) => arr.sort(() => Math.random() - 0.5);
+const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
+const useGetRandomBoolean = () => Math.random() >= 0.5;
+const useAverage = (arr) => arr.reduce((a, b) => a + b) / arr.length;
 
-export { useDebounce, useExitFullscreen, useForeachTree, useFuzzyQuery, useHideMobile, useLaunchFullscreen, useLocalCache, useMoneyFormat, useScrollToTop, useSearchParams, useSessionCache, useSmoothScroll, useSysType, useThrottle, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

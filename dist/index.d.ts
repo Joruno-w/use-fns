@@ -38,8 +38,18 @@ declare class MyCache {
 }
 declare const useLocalCache: MyCache;
 declare const useSessionCache: MyCache;
-
 declare const useFuzzyQuery: <T extends Record<string | number | symbol, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
 declare const useForeachTree: <T extends Record<string | number | symbol, any>, K extends keyof T>(data: T[], cb: Function, childrenName: K) => void;
+declare const useCharacterCount: (str: string, char: string) => number;
+declare const useIsEmptyObj: <T extends Record<string | number | symbol, any>>(obj: T) => boolean;
+declare const useDelay: (ms: number) => Promise<unknown>;
+declare const useDaysBetween: (d1: number, d2: number) => number;
+declare const useRedirect: (url: string) => string;
+declare const useTouchSupported: () => any;
+declare const useInsertHTMLAfter: (html: string, el: Element) => void;
+declare const useShuffle: (arr: any[]) => any[];
+declare const useGetSelectedText: () => string;
+declare const useGetRandomBoolean: () => boolean;
+declare const useAverage: (arr: any[]) => number;
 
-export { useDebounce, useExitFullscreen, useForeachTree, useFuzzyQuery, useHideMobile, useLaunchFullscreen, useLocalCache, useMoneyFormat, useScrollToTop, useSearchParams, useSessionCache, useSmoothScroll, useSysType, useThrottle, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
