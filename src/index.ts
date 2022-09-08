@@ -1,4 +1,10 @@
-import type { NormalKeys,Doc, Ele, QuerySelector, MoneyFormatParams } from "./types";
+import type {
+  NormalKeys,
+  Doc,
+  Ele,
+  QuerySelector,
+  MoneyFormatParams,
+} from "./types";
 
 // 判断变量类型
 const useTypeOf = function (obj: any) {
@@ -101,10 +107,7 @@ const useSysType = () => {
 // 数组对象根据字段去重
 // arr 要去重的数组
 // key 根据去重的字段名
-const useUniqueArrObj = <
-  T extends Record<NormalKeys, any>,
-  U extends T[]
->(
+const useUniqueArrObj = <T extends Record<NormalKeys, any>, U extends T[]>(
   arr: U,
   key: keyof T
 ) => {
@@ -214,7 +217,6 @@ class MyCache {
 const useLocalCache = new MyCache();
 const useSessionCache = new MyCache(false);
 
-
 // 模糊搜索
 // list 原数组
 // keyWord 查询的关键词
@@ -232,10 +234,7 @@ const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
 };
 
 // 遍历树节点
-const useForeachTree = <
-  T extends Record<NormalKeys, any>,
-  K extends keyof T
->(
+const useForeachTree = <T extends Record<NormalKeys, any>, K extends keyof T>(
   data: T[],
   cb: Function,
   childrenName: K
@@ -248,41 +247,46 @@ const useForeachTree = <
   }
 };
 
-
 // 获取字符串中的字符数
-const useCharacterCount = (str: string, char: string) => str.split(char).length - 1
+const useCharacterCount = (str: string, char: string) =>
+  str.split(char).length - 1;
 
 // 检查对象是否为空
-const useIsEmptyObj = <T extends Record<NormalKeys,any>>(obj: T) => Reflect.ownKeys(obj).length === 0 && obj.constructor === Object
+const useIsEmptyObj = <T extends Record<NormalKeys, any>>(obj: T) =>
+  Reflect.ownKeys(obj).length === 0 && obj.constructor === Object;
 
 // 等待一段时间再执行
-const useDelay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const useDelay = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 // 获取两个日期之间的日差
-const useDaysBetween = (d1: number, d2: number) => Math.ceil(Math.abs(d1 - d2) / (1000 * 60 * 60 * 24))
+const useDaysBetween = (d1: number, d2: number) =>
+  Math.ceil(Math.abs(d1 - d2) / (1000 * 60 * 60 * 24));
 
 // 重定向到另一个 URL
-const useRedirect = (url: string) => location.href = url
+const useRedirect = (url: string) => (location.href = url);
 
 // 检查设备上的触摸支持
-// @ts-ignore
-const useTouchSupported = () => ('ontouchstart' in window || DocumentTouch && document instanceof DocumentTouch)
+const useTouchSupported = () =>
+  "ontouchstart" in window ||
+  // @ts-ignore
+  (DocumentTouch && document instanceof DocumentTouch);
 
 // 在元素后插入 HTML 字符串
-const useInsertHTMLAfter = (html: string, el: Element) => el.insertAdjacentHTML('afterend', html)
+const useInsertHTMLAfter = (html: string, el: Element) =>
+  el.insertAdjacentHTML("afterend", html);
 
 // 随机排列数组
-const useShuffle = (arr: any[]) => arr.sort(() => Math.random() - .5)
+const useShuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
 
 // 在网页上获取选定的文本
-const useGetSelectedText = () => window.getSelection()?.toString() ?? ''
+const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
 
 // 获取随机布尔值
-const useGetRandomBoolean = () => Math.random() >= 0.5
+const useGetRandomBoolean = () => Math.random() >= 0.5;
 
 // 计算数组的平均值
-const useAverage = (arr: any[]) => arr.reduce((a, b) => a + b) / arr.length
-
+const useAverage = (arr: any[]) => arr.reduce((a, b) => a + b) / arr.length;
 
 export {
   useTypeOf,
@@ -313,5 +317,5 @@ export {
   useShuffle,
   useGetSelectedText,
   useGetRandomBoolean,
-  useAverage
-}
+  useAverage,
+};
