@@ -285,8 +285,12 @@ const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
 // 获取随机布尔值
 const useGetRandomBoolean = () => Math.random() >= 0.5;
 
+// 计算数组的和
+const useSum = (arr: any[]) => arr.reduce((a,b) => a + b);
+
 // 计算数组的平均值
-const useAverage = (arr: any[]) => arr.reduce((a, b) => a + b) / arr.length;
+const useAverage = (arr: any[]) => useSum(arr) / arr.length;
+
 
 export {
   useTypeOf,
