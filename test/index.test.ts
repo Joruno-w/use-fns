@@ -19,6 +19,22 @@ describe("test", () => {
           "useScrollToTop",
           "useSmoothScroll",
           "useUUID",
+          "useMoneyFormat",
+          "useLocalCache",
+          "useSessionCache",
+          "useFuzzyQuery",
+          "useForeachTree",
+          "useCharacterCount",
+          "useIsEmptyObj",
+          "useDelay",
+          "useDaysBetween",
+          "useRedirect",
+          "useTouchSupported",
+          "useInsertHTMLAfter",
+          "useShuffle",
+          "useGetSelectedText",
+          "useGetRandomBoolean",
+          "useAverage",
         ]
       `);
   });
