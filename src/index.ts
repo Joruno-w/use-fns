@@ -13,7 +13,7 @@ const useTypeOf = function (obj: any) {
 
 // 防抖
 const useDebounce = (() => {
-  let timer: NodeJS.Timeout;
+  let timer: NodeJS.Timeout
   return (cb: () => void, wait = 500) => {
     timer && clearTimeout(timer);
     timer = setTimeout(cb, wait);
@@ -290,6 +290,7 @@ const useSum = (arr: any[]) => arr.reduce((a,b) => a + b);
 
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
+
 
 
 export {
