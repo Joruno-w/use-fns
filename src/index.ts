@@ -13,12 +13,12 @@ const useTypeOf = function (obj: any) {
 
 // 防抖
 const useDebounce = (() => {
-  let timer: NodeJS.Timeout
+  let timer: ReturnType<typeof setTimeout>
   return (cb: () => void, wait = 500) => {
     timer && clearTimeout(timer);
     timer = setTimeout(cb, wait);
   };
-})();
+})()
 
 // 节流
 const useThrottle = (() => {
