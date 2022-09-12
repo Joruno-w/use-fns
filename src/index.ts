@@ -80,15 +80,11 @@ const useTurnCase = (str: string, type: number) => {
 };
 
 // 解析URL参数
-const useSearchParams = () => {
-  const searchParams: URLSearchParams = new URLSearchParams(
-    window.location.search
-  );
-  const params: Record<string, string> = {};
-  for (const [k, v] of searchParams.entries()) {
-    params[k] = v;
-  }
-  return params;
+const useSearchParams = (): Record<string,string> => {
+  if(!location.search) return {};
+  return Object.fromEntries(new URLSearchParams(
+    location.search
+  ))
 };
 
 // 判断端环境
