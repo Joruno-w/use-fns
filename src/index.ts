@@ -6,6 +6,7 @@ import type {
   MoneyFormatParams,
 } from "./types";
 
+
 // 判断变量类型
 const useTypeOf = function (obj: any) {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
