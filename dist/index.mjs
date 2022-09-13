@@ -57,14 +57,11 @@ const useTurnCase = (str, type) => {
   }
 };
 const useSearchParams = () => {
-  const searchParams = new URLSearchParams(
-    window.location.search
-  );
-  const params = {};
-  for (const [k, v] of searchParams.entries()) {
-    params[k] = v;
-  }
-  return params;
+  if (!location.search)
+    return {};
+  return Object.fromEntries(new URLSearchParams(
+    location.search
+  ));
 };
 const useSysType = () => {
   const u = navigator.userAgent;
@@ -185,6 +182,7 @@ const useInsertHTMLAfter = (html, el) => el.insertAdjacentHTML("afterend", html)
 const useShuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
 const useGetRandomBoolean = () => Math.random() >= 0.5;
-const useAverage = (arr) => arr.reduce((a, b) => a + b) / arr.length;
+const useSum = (arr) => arr.reduce((a, b) => a + b);
+const useAverage = (arr) => useSum(arr) / arr.length;
 
 export { useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
