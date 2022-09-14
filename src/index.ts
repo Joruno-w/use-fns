@@ -6,7 +6,6 @@ import type {
   MoneyFormatParams,
 } from "./types";
 
-
 // 判断变量类型
 const useTypeOf = function (obj: any) {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -14,12 +13,12 @@ const useTypeOf = function (obj: any) {
 
 // 防抖
 const useDebounce = (() => {
-  let timer: ReturnType<typeof setTimeout>
+  let timer: ReturnType<typeof setTimeout>;
   return (cb: () => void, wait = 500) => {
     timer && clearTimeout(timer);
     timer = setTimeout(cb, wait);
   };
-})()
+})();
 
 // 节流
 const useThrottle = (() => {
@@ -80,11 +79,10 @@ const useTurnCase = (str: string, type: number) => {
 };
 
 // 解析URL参数
-const useSearchParams = (): Record<string,string> => {
-  if(!location.search) return {};
-  return Object.fromEntries(new URLSearchParams(
-    location.search
-  ))
+const useSearchParams = (): Record<string, string> => {
+  return location.search
+    ? Object.fromEntries(new URLSearchParams(location.search))
+    : {};
 };
 
 // 判断端环境
@@ -283,12 +281,10 @@ const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
 const useGetRandomBoolean = () => Math.random() >= 0.5;
 
 // 计算数组的和
-const useSum = (arr: any[]) => arr.reduce((a,b) => a + b);
+const useSum = (arr: any[]) => arr.reduce((a, b) => a + b);
 
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
-
-
 
 export {
   useTypeOf,
