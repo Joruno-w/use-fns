@@ -11,9 +11,14 @@ for (const [, , name] of regIterator) {
 }
 
 const exportsName = "pkg";
+
 const allExports = `{ ${str.substring(0, str.length - 1)} \n}`;
 
-writeFileSync(filename, `\n\nconst ${exportsName} = ${allExports}\n\n`, {
+if (content.includes(exportsName)) {
+  const res = content.replace(/const pkg [\s\S]+/, "");
+  writeFileSync(filename, res);
+}
+writeFileSync(filename, `const ${exportsName} = ${allExports}\n\n`, {
   flag: "a",
 });
 writeFileSync(filename, `export default ${exportsName}\n\n`, { flag: "a" });

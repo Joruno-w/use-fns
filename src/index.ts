@@ -285,6 +285,8 @@ const useSum = (arr: any[]) => arr.reduce((a, b) => a + b);
 
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
+
+
 const pkg = { 
   useTypeOf,
   useDebounce,
@@ -315,7 +317,7 @@ const pkg = {
   useGetSelectedText,
   useGetRandomBoolean,
   useSum,
-  useAverage 
+  useAverage
 }
 
 export default pkg
@@ -350,7 +352,7 @@ export {
   useGetSelectedText,
   useGetRandomBoolean,
   useSum,
-  useAverage 
+  useAverage
 } 
 
 module.exports = pkg
