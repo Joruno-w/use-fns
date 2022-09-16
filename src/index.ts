@@ -7,7 +7,7 @@ import type {
 } from "./types";
 
 // 判断变量类型
-const useTypeOf = function (obj: any) {
+const useTypeOf = (obj: any)=>{
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
 
@@ -286,7 +286,8 @@ const useSum = (arr: any[]) => arr.reduce((a, b) => a + b);
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
 
-export {
+
+const pkg = { 
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -315,5 +316,43 @@ export {
   useShuffle,
   useGetSelectedText,
   useGetRandomBoolean,
-  useAverage,
-};
+  useSum,
+  useAverage, 
+}
+
+export default pkg
+
+export { 
+  useTypeOf,
+  useDebounce,
+  useThrottle,
+  useHideMobile,
+  useLaunchFullscreen,
+  useExitFullscreen,
+  useTurnCase,
+  useSearchParams,
+  useSysType,
+  useUniqueArrObj,
+  useScrollToTop,
+  useSmoothScroll,
+  useUUID,
+  useMoneyFormat,
+  useLocalCache,
+  useSessionCache,
+  useFuzzyQuery,
+  useForeachTree,
+  useCharacterCount,
+  useIsEmptyObj,
+  useDelay,
+  useDaysBetween,
+  useRedirect,
+  useTouchSupported,
+  useInsertHTMLAfter,
+  useShuffle,
+  useGetSelectedText,
+  useGetRandomBoolean,
+  useSum,
+  useAverage, 
+} 
+
+module.exports = pkg
