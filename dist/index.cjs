@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const useTypeOf = function(obj) {
+const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
 const useDebounce = (() => {
@@ -61,11 +61,7 @@ const useTurnCase = (str, type) => {
   }
 };
 const useSearchParams = () => {
-  if (!location.search)
-    return {};
-  return Object.fromEntries(new URLSearchParams(
-    location.search
-  ));
+  return location.search ? Object.fromEntries(new URLSearchParams(location.search)) : {};
 };
 const useSysType = () => {
   const u = navigator.userAgent;
@@ -188,7 +184,59 @@ const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
 const useGetRandomBoolean = () => Math.random() >= 0.5;
 const useSum = (arr) => arr.reduce((a, b) => a + b);
 const useAverage = (arr) => useSum(arr) / arr.length;
+const useIsUrl = (url, { lenient = false } = {}) => {
+  if (typeof url !== "string") {
+    throw new TypeError("Expected a string");
+  }
+  url = url.trim();
+  if (url.includes(" "))
+    return false;
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    if (lenient) {
+      return useIsUrl(`https://${url}`);
+    }
+    return false;
+  }
+};
+const pkg = {
+  useTypeOf,
+  useDebounce,
+  useThrottle,
+  useHideMobile,
+  useLaunchFullscreen,
+  useExitFullscreen,
+  useTurnCase,
+  useSearchParams,
+  useSysType,
+  useUniqueArrObj,
+  useScrollToTop,
+  useSmoothScroll,
+  useUUID,
+  useMoneyFormat,
+  useLocalCache,
+  useSessionCache,
+  useFuzzyQuery,
+  useForeachTree,
+  useCharacterCount,
+  useIsEmptyObj,
+  useDelay,
+  useDaysBetween,
+  useRedirect,
+  useTouchSupported,
+  useInsertHTMLAfter,
+  useShuffle,
+  useGetSelectedText,
+  useGetRandomBoolean,
+  useSum,
+  useAverage,
+  useIsUrl
+};
+module.exports = pkg;
 
+exports["default"] = pkg;
 exports.useAverage = useAverage;
 exports.useCharacterCount = useCharacterCount;
 exports.useDaysBetween = useDaysBetween;
@@ -202,6 +250,7 @@ exports.useGetSelectedText = useGetSelectedText;
 exports.useHideMobile = useHideMobile;
 exports.useInsertHTMLAfter = useInsertHTMLAfter;
 exports.useIsEmptyObj = useIsEmptyObj;
+exports.useIsUrl = useIsUrl;
 exports.useLaunchFullscreen = useLaunchFullscreen;
 exports.useLocalCache = useLocalCache;
 exports.useMoneyFormat = useMoneyFormat;
@@ -211,6 +260,7 @@ exports.useSearchParams = useSearchParams;
 exports.useSessionCache = useSessionCache;
 exports.useShuffle = useShuffle;
 exports.useSmoothScroll = useSmoothScroll;
+exports.useSum = useSum;
 exports.useSysType = useSysType;
 exports.useThrottle = useThrottle;
 exports.useTouchSupported = useTouchSupported;

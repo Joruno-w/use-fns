@@ -50,6 +50,45 @@ declare const useInsertHTMLAfter: (html: string, el: Element) => void;
 declare const useShuffle: (arr: any[]) => any[];
 declare const useGetSelectedText: () => string;
 declare const useGetRandomBoolean: () => boolean;
+declare const useSum: (arr: any[]) => any;
 declare const useAverage: (arr: any[]) => number;
+declare const useIsUrl: (url: string, { lenient }?: {
+    readonly lenient?: boolean | undefined;
+}) => boolean;
+declare const pkg: {
+    useTypeOf: (obj: any) => string;
+    useDebounce: (cb: () => void, wait?: number) => void;
+    useThrottle: (cb: () => void, wait?: number) => void;
+    useHideMobile: (mobile: string) => string;
+    useLaunchFullscreen: (element: Ele) => void;
+    useExitFullscreen: () => void;
+    useTurnCase: (str: string, type: number) => string;
+    useSearchParams: () => Record<string, string>;
+    useSysType: () => "ios" | "android" | "";
+    useUniqueArrObj: <T extends Record<string | number | symbol, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
+    useScrollToTop: () => void;
+    useSmoothScroll: (selector: QuerySelector) => void;
+    useUUID: () => string;
+    useMoneyFormat: ({ number, decimals, dec_point: dec, thousands_sep: sep, }: MoneyFormatParams) => string;
+    useLocalCache: MyCache;
+    useSessionCache: MyCache;
+    useFuzzyQuery: <T_1 extends Record<string | number | symbol, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => unknown[];
+    useForeachTree: <T_2 extends Record<string | number | symbol, any>, K_1 extends keyof T_2>(data: T_2[], cb: Function, childrenName: K_1) => void;
+    useCharacterCount: (str: string, char: string) => number;
+    useIsEmptyObj: <T_3 extends Record<string | number | symbol, any>>(obj: T_3) => boolean;
+    useDelay: (ms: number) => Promise<unknown>;
+    useDaysBetween: (d1: number, d2: number) => number;
+    useRedirect: (url: string) => string;
+    useTouchSupported: () => any;
+    useInsertHTMLAfter: (html: string, el: Element) => void;
+    useShuffle: (arr: any[]) => any[];
+    useGetSelectedText: () => string;
+    useGetRandomBoolean: () => boolean;
+    useSum: (arr: any[]) => any;
+    useAverage: (arr: any[]) => number;
+    useIsUrl: (url: string, { lenient }?: {
+        readonly lenient?: boolean | undefined;
+    }) => boolean;
+};
 
-export { useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

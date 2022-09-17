@@ -7,7 +7,7 @@ import type {
 } from "./types";
 
 // 判断变量类型
-const useTypeOf = (obj: any)=>{
+const useTypeOf = (obj: any) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
 
@@ -286,6 +286,27 @@ const useSum = (arr: any[]) => arr.reduce((a, b) => a + b);
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
 
+// 判断字符串是不是合法的URL
+const useIsUrl = (
+  url: string,
+  { lenient = false }: { readonly lenient?: boolean } = {}
+): boolean => {
+  if (typeof url !== "string") {
+    throw new TypeError("Expected a string");
+  }
+  url = url.trim();
+  if (url.includes(" ")) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    if (lenient) {
+      return useIsUrl(`https://${url}`);
+    }
+    return false;
+  }
+};
+
 const pkg = { 
   useTypeOf,
   useDebounce,
@@ -316,7 +337,8 @@ const pkg = {
   useGetSelectedText,
   useGetRandomBoolean,
   useSum,
-  useAverage
+  useAverage,
+  useIsUrl 
 }
 
 export default pkg
@@ -351,7 +373,8 @@ export {
   useGetSelectedText,
   useGetRandomBoolean,
   useSum,
-  useAverage
+  useAverage,
+  useIsUrl 
 } 
 
 module.exports = pkg
