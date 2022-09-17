@@ -45,7 +45,7 @@ describe("Get All Export keys", () => {
   });
 });
 
-describe("test each function", () => {
+describe("test each function output", () => {
   it("useIsUrl", () => {
     expect(fns.useIsUrl("https://github.com")).toBe(true);
     expect(fns.useIsUrl("github.com")).toBe(false);

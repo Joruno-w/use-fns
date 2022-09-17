@@ -201,6 +201,24 @@ const useIsUrl = (url, { lenient = false } = {}) => {
     return false;
   }
 };
+const useGithubUrlFromGit = (url, opts = {}) => {
+  const re = (opts2 = {}) => {
+    var baseUrls = ["gist.github.com", "github.com"].concat(
+      opts2.extraBaseUrls || []
+    );
+    return new RegExp(
+      /^(?:https?:\/\/|git:\/\/|git\+ssh:\/\/|git\+https:\/\/)?(?:[^@]+@)?/.source + "(" + baseUrls.join("|") + ")" + /(?::\/?|\/)([^/]+\/[^/]+?|[0-9]+)$/.source
+    );
+  };
+  try {
+    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, ""));
+    var host = m[1];
+    var path = m[2];
+    return "https://" + host + "/" + path;
+  } catch {
+    return "";
+  }
+};
 const pkg = {
   useTypeOf,
   useDebounce,
@@ -232,7 +250,8 @@ const pkg = {
   useGetRandomBoolean,
   useSum,
   useAverage,
-  useIsUrl
+  useIsUrl,
+  useGithubUrlFromGit
 };
 module.exports = pkg;
 
@@ -247,6 +266,7 @@ exports.useForeachTree = useForeachTree;
 exports.useFuzzyQuery = useFuzzyQuery;
 exports.useGetRandomBoolean = useGetRandomBoolean;
 exports.useGetSelectedText = useGetSelectedText;
+exports.useGithubUrlFromGit = useGithubUrlFromGit;
 exports.useHideMobile = useHideMobile;
 exports.useInsertHTMLAfter = useInsertHTMLAfter;
 exports.useIsEmptyObj = useIsEmptyObj;

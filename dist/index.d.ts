@@ -55,6 +55,7 @@ declare const useAverage: (arr: any[]) => number;
 declare const useIsUrl: (url: string, { lenient }?: {
     readonly lenient?: boolean | undefined;
 }) => boolean;
+declare const useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
 declare const pkg: {
     useTypeOf: (obj: any) => string;
     useDebounce: (cb: () => void, wait?: number) => void;
@@ -89,6 +90,7 @@ declare const pkg: {
     useIsUrl: (url: string, { lenient }?: {
         readonly lenient?: boolean | undefined;
     }) => boolean;
+    useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
 };
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

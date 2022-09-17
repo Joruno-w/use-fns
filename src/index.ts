@@ -307,6 +307,32 @@ const useIsUrl = (
   }
 };
 
+const useGithubUrlFromGit = (url: string, opts: Record<string, any> = {}): string => {
+  const re = (opts: Record<string, any> = {}) => {
+    // whitelist of URLs that should be treated as GitHub repos.
+    var baseUrls = ["gist.github.com", "github.com"].concat(
+      opts.extraBaseUrls || []
+    );
+    // build regex from whitelist.
+    return new RegExp(
+      /^(?:https?:\/\/|git:\/\/|git\+ssh:\/\/|git\+https:\/\/)?(?:[^@]+@)?/
+        .source +
+        "(" +
+        baseUrls.join("|") +
+        ")" +
+        /(?::\/?|\/)([^/]+\/[^/]+?|[0-9]+)$/.source
+    );
+  };
+  try {
+    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, "")) as any
+    var host = m[1];
+    var path = m[2];
+    return "https://" + host + "/" + path;
+  } catch {
+    return ''
+  }
+};
+
 const pkg = { 
   useTypeOf,
   useDebounce,
@@ -338,7 +364,8 @@ const pkg = {
   useGetRandomBoolean,
   useSum,
   useAverage,
-  useIsUrl 
+  useIsUrl,
+  useGithubUrlFromGit 
 }
 
 export default pkg
@@ -374,7 +401,8 @@ export {
   useGetRandomBoolean,
   useSum,
   useAverage,
-  useIsUrl 
+  useIsUrl,
+  useGithubUrlFromGit 
 } 
 
 module.exports = pkg

@@ -197,6 +197,24 @@ const useIsUrl = (url, { lenient = false } = {}) => {
     return false;
   }
 };
+const useGithubUrlFromGit = (url, opts = {}) => {
+  const re = (opts2 = {}) => {
+    var baseUrls = ["gist.github.com", "github.com"].concat(
+      opts2.extraBaseUrls || []
+    );
+    return new RegExp(
+      /^(?:https?:\/\/|git:\/\/|git\+ssh:\/\/|git\+https:\/\/)?(?:[^@]+@)?/.source + "(" + baseUrls.join("|") + ")" + /(?::\/?|\/)([^/]+\/[^/]+?|[0-9]+)$/.source
+    );
+  };
+  try {
+    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, ""));
+    var host = m[1];
+    var path = m[2];
+    return "https://" + host + "/" + path;
+  } catch {
+    return "";
+  }
+};
 const pkg = {
   useTypeOf,
   useDebounce,
@@ -228,8 +246,9 @@ const pkg = {
   useGetRandomBoolean,
   useSum,
   useAverage,
-  useIsUrl
+  useIsUrl,
+  useGithubUrlFromGit
 };
 module.exports = pkg;
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
