@@ -49,11 +49,6 @@
   "files": [
     "dist"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "esno ./src/file.ts"
-    }
-  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
