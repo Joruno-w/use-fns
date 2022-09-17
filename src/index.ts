@@ -286,6 +286,8 @@ const useSum = (arr: any[]) => arr.reduce((a, b) => a + b);
 // 计算数组的平均值
 const useAverage = (arr: any[]) => useSum(arr) / arr.length;
 
+const use123 = 123
+
 
 const pkg = { 
   useTypeOf,

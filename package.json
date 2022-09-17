@@ -49,6 +49,11 @@
   "files": [
     "dist"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "esno ./src/file.ts"
+    }
+  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
@@ -72,5 +77,8 @@
     "urpm": "^0.0.4",
     "vite": "^3.0.7",
     "vitest": "^0.22.0"
+  },
+  "dependencies": {
+    "husky": "^8.0.1"
   }
 }

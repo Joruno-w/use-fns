@@ -5,6 +5,7 @@ specifiers:
   bumpp: ^8.2.1
   eslint: ^8.22.0
   esno: ^0.16.3
+  husky: ^8.0.1
   jsdom: ^20.0.0
   pnpm: ^7.9.0
   rimraf: ^3.0.2
@@ -13,6 +14,9 @@ specifiers:
   urpm: ^0.0.4
   vite: ^3.0.7
   vitest: ^0.22.0
+
+dependencies:
+  husky: 8.0.1
 
 devDependencies:
   '@types/node': 18.7.5
@@ -1853,6 +1857,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: false
 
   /iconv-lite/0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
