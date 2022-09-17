@@ -50,6 +50,7 @@
     "dist"
   ],
   "scripts": {
+    "e": "esno ./src/file.ts",
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
@@ -64,6 +65,7 @@
     "bumpp": "^8.2.1",
     "eslint": "^8.22.0",
     "esno": "^0.16.3",
+    "husky": "^8.0.1",
     "jsdom": "^20.0.0",
     "pnpm": "^7.9.0",
     "rimraf": "^3.0.2",
@@ -72,8 +74,5 @@
     "urpm": "^0.0.4",
     "vite": "^3.0.7",
     "vitest": "^0.22.0"
-  },
-  "dependencies": {
-    "husky": "^8.0.1"
   }
 }

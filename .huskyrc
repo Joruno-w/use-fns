@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "esno ./src/file.ts"
+    "pre-commit": "nr e"
   }
 }
