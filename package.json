@@ -1,7 +1,7 @@
 {
   "name": "use-fns",
   "type": "module",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "packageManager": "pnpm@7.9.5",
   "description": "",
   "author": "Joruno-w <1710642275@qq.com>",
@@ -66,6 +66,7 @@
     "eslint": "^8.22.0",
     "esno": "^0.16.3",
     "jsdom": "^20.0.0",
+    "meow": "^10.1.3",
     "pnpm": "^7.9.0",
     "rimraf": "^3.0.2",
     "tsd": "^0.24.1",
