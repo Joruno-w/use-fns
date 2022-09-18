@@ -1,7 +1,7 @@
 {
   "name": "use-fns",
   "type": "module",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "packageManager": "pnpm@7.9.5",
   "description": "",
   "author": "Joruno-w <1710642275@qq.com>",
@@ -50,12 +50,12 @@
     "dist"
   ],
   "scripts": {
-    "demo": "node ./src/demo.js",
+    "u": "esno ./src/updateVersion.ts",    
     "e": "esno ./src/exports.ts",
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
-    "prepublishOnly": "nr e && nr build",
+    "prepublishOnly": "nr u && nr e && nr build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
