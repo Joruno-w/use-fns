@@ -27,7 +27,7 @@ declare function useTypeOf<T extends any>(obj: T): string;
 ```
 
 ```ts
-import {useTypeOf} from 'use-fns'
+import { useTypeOf } from 'use-fns'
 console.log(useTypeOf('abc')) // 'string'
 console.log(useTypeOf(123)) // 'number'
 console.log(useTypeOf(true)) // 'boolean'
@@ -49,7 +49,10 @@ anti-shake
 Calling a function multiple times only takes the last one as the result
 
 ```ts
-declare function useDebounce<T extends Function,U extends number = 500>(cb: T,wait: U): Function;
+declare function useDebounce<T extends Function, U extends number = 500>(
+  cb: T,
+  wait: U
+): Function;
 ```
 
 ```ts
