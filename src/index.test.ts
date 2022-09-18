@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { expectType } from "tsd";
 import { resolve } from "node:path";
-import * as fns from "./index";
+import * as fns from './'
 
 describe("Get All Export keys", () => {
   it("exports", async () => {

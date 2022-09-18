@@ -2,6 +2,54 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+const vue = require('vue');
+
+const paramsSymbol = Symbol("paramsSymbol");
+function useToggle(arr, order = "asc", start = 0, end = arr.length) {
+  const values = arr.slice(start, end).map((m) => vue.unref(m));
+  const len = values.length;
+  let i = order === "asc" ? start : order === "desc" ? end - 1 : Math.random() * (len - 1) | 0;
+  let v = vue.ref();
+  v.value = values[i];
+  const toggle = (params = paramsSymbol) => {
+    if (params !== paramsSymbol) {
+      v.value = params;
+      return;
+    }
+    switch (order) {
+      case "asc":
+        i = (i + 1) % len;
+        v.value = values[i];
+        break;
+      case "desc":
+        i = (i + len - 1) % len;
+        v.value = values[i];
+        break;
+      case "random":
+        i = Math.random() * (len - 1) | 0;
+        v.value = values[i];
+    }
+  };
+  return {
+    i,
+    v,
+    values,
+    toggle
+  };
+}
+
+function useBoolean(value = false) {
+  const { v, toggle } = useToggle([value, !value]);
+  const setTrue = () => toggle(true);
+  const setFalse = () => toggle(false);
+  return {
+    v,
+    setTrue,
+    setFalse,
+    toggle
+  };
+}
+
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
@@ -268,6 +316,7 @@ module.exports = pkg;
 
 exports["default"] = pkg;
 exports.useAverage = useAverage;
+exports.useBoolean = useBoolean;
 exports.useCharacterCount = useCharacterCount;
 exports.useDaysBetween = useDaysBetween;
 exports.useDebounce = useDebounce;
@@ -296,6 +345,7 @@ exports.useSmoothScroll = useSmoothScroll;
 exports.useSum = useSum;
 exports.useSysType = useSysType;
 exports.useThrottle = useThrottle;
+exports.useToggle = useToggle;
 exports.useTouchSupported = useTouchSupported;
 exports.useTurnCase = useTurnCase;
 exports.useTypeOf = useTypeOf;

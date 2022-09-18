@@ -354,6 +354,7 @@ const useIsScoped = (s: string) => {
   return useScopedRegex({ exact: true }).test(s);
 };
 
+export * from './vue'
 
 const pkg = { 
   useTypeOf,
@@ -430,5 +431,3 @@ export {
   useScopedRegex,
   useIsScoped 
 } 
-
-module.exports = pkg

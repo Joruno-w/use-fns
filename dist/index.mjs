@@ -1,3 +1,51 @@
+import { unref, ref } from 'vue';
+
+const paramsSymbol = Symbol("paramsSymbol");
+function useToggle(arr, order = "asc", start = 0, end = arr.length) {
+  const values = arr.slice(start, end).map((m) => unref(m));
+  const len = values.length;
+  let i = order === "asc" ? start : order === "desc" ? end - 1 : Math.random() * (len - 1) | 0;
+  let v = ref();
+  v.value = values[i];
+  const toggle = (params = paramsSymbol) => {
+    if (params !== paramsSymbol) {
+      v.value = params;
+      return;
+    }
+    switch (order) {
+      case "asc":
+        i = (i + 1) % len;
+        v.value = values[i];
+        break;
+      case "desc":
+        i = (i + len - 1) % len;
+        v.value = values[i];
+        break;
+      case "random":
+        i = Math.random() * (len - 1) | 0;
+        v.value = values[i];
+    }
+  };
+  return {
+    i,
+    v,
+    values,
+    toggle
+  };
+}
+
+function useBoolean(value = false) {
+  const { v, toggle } = useToggle([value, !value]);
+  const setTrue = () => toggle(true);
+  const setFalse = () => toggle(false);
+  return {
+    v,
+    setTrue,
+    setFalse,
+    toggle
+  };
+}
+
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
@@ -262,4 +310,4 @@ const pkg = {
 };
 module.exports = pkg;
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

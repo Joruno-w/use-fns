@@ -1,3 +1,5 @@
+import { Ref } from 'vue';
+
 interface Ele extends Element {
     requestFullscreen: (options?: FullscreenOptions) => Promise<void>;
     mozRequestFullscreen?: (options?: FullscreenOptions) => Promise<void>;
@@ -11,6 +13,30 @@ interface MoneyFormatParams {
     dec_point?: string;
     thousands_sep?: string;
 }
+
+declare type MaybeRef<T> = T | Ref<T>;
+
+interface UseBooleanReturn {
+    v: Ref<boolean | undefined>;
+    toggle: () => void;
+    setTrue: () => void;
+    setFalse: () => void;
+}
+/**
+ *
+ * @param defaultValue
+ * @returns
+ */
+declare function useBoolean(value?: boolean): UseBooleanReturn;
+
+declare type orderType = "asc" | "desc" | "random";
+interface UseToggleReturn<T> {
+    i: number;
+    v: Ref<T | undefined>;
+    values: T[];
+    toggle: (v?: any) => void;
+}
+declare function useToggle<T extends any>(arr: MaybeRef<T>[], order?: orderType, start?: number, end?: number): UseToggleReturn<T>;
 
 declare const useTypeOf: (obj: any) => string;
 declare const useDebounce: (cb: () => void, wait?: number) => () => void;
@@ -60,6 +86,7 @@ declare const useScopedRegex: (options?: {
     exact?: boolean;
 }) => RegExp;
 declare const useIsScoped: (s: string) => boolean;
+
 declare const pkg: {
     useTypeOf: (obj: any) => string;
     useDebounce: (cb: () => void, wait?: number) => () => void;
@@ -101,4 +128,4 @@ declare const pkg: {
     useIsScoped: (s: string) => boolean;
 };
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { MaybeRef, pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

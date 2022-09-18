@@ -50,7 +50,7 @@
     "dist"
   ],
   "scripts": {
-    "e": "esno ./src/file.ts",
+    "e": "esno ./src/exports.ts",
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
