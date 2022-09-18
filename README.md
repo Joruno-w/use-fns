@@ -2,7 +2,7 @@
 
 Some utility functions prefixed with use
 
-[![NPM version](https://img.shields.io/badge/npm-1.0.13-brightgreen)](https://www.npmjs.com/package/use-fns)
+[![NPM version](https://img.shields.io/badge/npm-1.0.14-brightgreen)](https://www.npmjs.com/package/use-fns)
 
 ## Install
 
@@ -63,6 +63,39 @@ while (1) {
   newCb();
 }
 ```
+
+### useThrottle,
+### useHideMobile,
+### useLaunchFullscreen,
+### useExitFullscreen,
+### useTurnCase,
+### useSearchParams,
+### useSysType,
+### useUniqueArrObj,
+### useScrollToTop,
+### useSmoothScroll,
+### useUUID,
+### useMoneyFormat,
+### useLocalCache,
+### useSessionCache,
+### useFuzzyQuery,
+### useForeachTree,
+### useCharacterCount,
+### useIsEmptyObj,
+### useDelay,
+### useDaysBetween,
+### useRedirect,
+### useTouchSupported,
+### useInsertHTMLAfter,
+### useShuffle,
+### useGetSelectedText,
+### useGetRandomBoolean,
+### useSum,
+### useAverage,
+### useIsUrl,
+### useGithubUrlFromGit,
+### useScopedRegex,
+###  useIsScoped 
 
 ## License
 
