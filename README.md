@@ -49,7 +49,7 @@ anti-shake
 Calling a function multiple times only takes the last one as the result
 
 ```ts
-declare function useDebounce<T extends Function,U extends number>(cb: T,wait: U): Function;
+declare function useDebounce<T extends Function,U extends number = 500>(cb: T,wait: U): Function;
 ```
 
 ```ts
