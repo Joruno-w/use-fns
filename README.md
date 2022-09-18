@@ -44,8 +44,6 @@ console.log(useTypeOf(new Date())) // 'date'
 
 ### useDebounce
 
-anti-shake
-
 Calling a function multiple times only takes the last one as the result
 
 ```ts
@@ -95,7 +93,7 @@ while (1) {
 ### useIsUrl,
 ### useGithubUrlFromGit,
 ### useScopedRegex,
-###  useIsScoped 
+### useIsScoped 
 
 ## License
 
