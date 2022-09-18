@@ -12,25 +12,29 @@ const useTypeOf = (obj: any) => {
 };
 
 // 防抖
-const useDebounce = (() => {
+const useDebounce = (cb: () => void, wait = 500) => {
   let timer: ReturnType<typeof setTimeout>;
-  return (cb: () => void, wait = 500) => {
+  return function () {
     timer && clearTimeout(timer);
-    timer = setTimeout(cb, wait);
+    timer = setTimeout(() => {
+      // @ts-ignore
+      cb.apply(this, arguments);
+    }, wait);
   };
-})();
+};
 
 // 节流
-const useThrottle = (() => {
+const useThrottle = (cb: () => void, wait = 500) => {
   let last: number = 0;
-  return (cb: () => void, wait = 500) => {
+  return function () {
     let now = +new Date();
     if (now - last > wait) {
-      cb();
+      // @ts-ignore
+      cb.apply(this, arguments);
       last = now;
     }
   };
-})();
+};
 
 // 手机号脱敏
 const useHideMobile = (mobile: string) => {
@@ -307,7 +311,10 @@ const useIsUrl = (
   }
 };
 
-const useGithubUrlFromGit = (url: string, opts: Record<string, any> = {}): string => {
+const useGithubUrlFromGit = (
+  url: string,
+  opts: Record<string, any> = {}
+): string => {
   const re = (opts: Record<string, any> = {}) => {
     // whitelist of URLs that should be treated as GitHub repos.
     var baseUrls = ["gist.github.com", "github.com"].concat(
@@ -324,16 +331,16 @@ const useGithubUrlFromGit = (url: string, opts: Record<string, any> = {}): strin
     );
   };
   try {
-    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, "")) as any
+    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, "")) as any;
     var host = m[1];
     var path = m[2];
     return "https://" + host + "/" + path;
   } catch {
-    return ''
+    return "";
   }
 };
 
-const pkg = { 
+const pkg = {
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -365,12 +372,12 @@ const pkg = {
   useSum,
   useAverage,
   useIsUrl,
-  useGithubUrlFromGit 
-}
+  useGithubUrlFromGit,
+};
 
-export default pkg
+export default pkg;
 
-export { 
+export {
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -402,7 +409,7 @@ export {
   useSum,
   useAverage,
   useIsUrl,
-  useGithubUrlFromGit 
-} 
+  useGithubUrlFromGit,
+};
 
-module.exports = pkg
+module.exports = pkg;
