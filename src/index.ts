@@ -340,7 +340,18 @@ const useGithubUrlFromGit = (
   }
 };
 
-const pkg = {
+const useScopedRegex = (options: { exact?: boolean } = {}) => {
+  const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
+  return options && options.exact
+    ? new RegExp(`^${regex}$`, "i")
+    : new RegExp(regex, "gi");
+};
+
+const useIsScoped = (s: string) => {
+  return useScopedRegex({ exact: true }).test(s);
+};
+
+const pkg = { 
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -373,11 +384,13 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-};
+  useScopedRegex,
+  useIsScoped 
+}
 
-export default pkg;
+export default pkg
 
-export {
+export { 
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -410,6 +423,8 @@ export {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-};
+  useScopedRegex,
+  useIsScoped 
+} 
 
-module.exports = pkg;
+module.exports = pkg

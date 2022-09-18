@@ -1,23 +1,25 @@
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
-const useDebounce = (() => {
+const useDebounce = (cb, wait = 500) => {
   let timer;
-  return (cb, wait = 500) => {
+  return function() {
     timer && clearTimeout(timer);
-    timer = setTimeout(cb, wait);
+    timer = setTimeout(() => {
+      cb.apply(this, arguments);
+    }, wait);
   };
-})();
-const useThrottle = (() => {
+};
+const useThrottle = (cb, wait = 500) => {
   let last = 0;
-  return (cb, wait = 500) => {
+  return function() {
     let now = +new Date();
     if (now - last > wait) {
-      cb();
+      cb.apply(this, arguments);
       last = now;
     }
   };
-})();
+};
 const useHideMobile = (mobile) => {
   return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2");
 };
@@ -215,6 +217,13 @@ const useGithubUrlFromGit = (url, opts = {}) => {
     return "";
   }
 };
+const useScopedRegex = (options = {}) => {
+  const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
+  return options && options.exact ? new RegExp(`^${regex}$`, "i") : new RegExp(regex, "gi");
+};
+const useIsScoped = (s) => {
+  return useScopedRegex({ exact: true }).test(s);
+};
 const pkg = {
   useTypeOf,
   useDebounce,
@@ -247,8 +256,10 @@ const pkg = {
   useSum,
   useAverage,
   useIsUrl,
-  useGithubUrlFromGit
+  useGithubUrlFromGit,
+  useScopedRegex,
+  useIsScoped
 };
 module.exports = pkg;
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

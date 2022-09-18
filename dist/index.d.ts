@@ -13,8 +13,8 @@ interface MoneyFormatParams {
 }
 
 declare const useTypeOf: (obj: any) => string;
-declare const useDebounce: (cb: () => void, wait?: number) => void;
-declare const useThrottle: (cb: () => void, wait?: number) => void;
+declare const useDebounce: (cb: () => void, wait?: number) => () => void;
+declare const useThrottle: (cb: () => void, wait?: number) => () => void;
 declare const useHideMobile: (mobile: string) => string;
 declare const useLaunchFullscreen: (element: Ele) => void;
 declare const useExitFullscreen: () => void;
@@ -56,10 +56,14 @@ declare const useIsUrl: (url: string, { lenient }?: {
     readonly lenient?: boolean | undefined;
 }) => boolean;
 declare const useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
+declare const useScopedRegex: (options?: {
+    exact?: boolean;
+}) => RegExp;
+declare const useIsScoped: (s: string) => boolean;
 declare const pkg: {
     useTypeOf: (obj: any) => string;
-    useDebounce: (cb: () => void, wait?: number) => void;
-    useThrottle: (cb: () => void, wait?: number) => void;
+    useDebounce: (cb: () => void, wait?: number) => () => void;
+    useThrottle: (cb: () => void, wait?: number) => () => void;
     useHideMobile: (mobile: string) => string;
     useLaunchFullscreen: (element: Ele) => void;
     useExitFullscreen: () => void;
@@ -91,6 +95,10 @@ declare const pkg: {
         readonly lenient?: boolean | undefined;
     }) => boolean;
     useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
+    useScopedRegex: (options?: {
+        exact?: boolean;
+    }) => RegExp;
+    useIsScoped: (s: string) => boolean;
 };
 
-export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

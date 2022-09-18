@@ -5,23 +5,25 @@ Object.defineProperty(exports, '__esModule', { value: true });
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
 };
-const useDebounce = (() => {
+const useDebounce = (cb, wait = 500) => {
   let timer;
-  return (cb, wait = 500) => {
+  return function() {
     timer && clearTimeout(timer);
-    timer = setTimeout(cb, wait);
+    timer = setTimeout(() => {
+      cb.apply(this, arguments);
+    }, wait);
   };
-})();
-const useThrottle = (() => {
+};
+const useThrottle = (cb, wait = 500) => {
   let last = 0;
-  return (cb, wait = 500) => {
+  return function() {
     let now = +new Date();
     if (now - last > wait) {
-      cb();
+      cb.apply(this, arguments);
       last = now;
     }
   };
-})();
+};
 const useHideMobile = (mobile) => {
   return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2");
 };
@@ -219,6 +221,13 @@ const useGithubUrlFromGit = (url, opts = {}) => {
     return "";
   }
 };
+const useScopedRegex = (options = {}) => {
+  const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
+  return options && options.exact ? new RegExp(`^${regex}$`, "i") : new RegExp(regex, "gi");
+};
+const useIsScoped = (s) => {
+  return useScopedRegex({ exact: true }).test(s);
+};
 const pkg = {
   useTypeOf,
   useDebounce,
@@ -251,7 +260,9 @@ const pkg = {
   useSum,
   useAverage,
   useIsUrl,
-  useGithubUrlFromGit
+  useGithubUrlFromGit,
+  useScopedRegex,
+  useIsScoped
 };
 module.exports = pkg;
 
@@ -270,11 +281,13 @@ exports.useGithubUrlFromGit = useGithubUrlFromGit;
 exports.useHideMobile = useHideMobile;
 exports.useInsertHTMLAfter = useInsertHTMLAfter;
 exports.useIsEmptyObj = useIsEmptyObj;
+exports.useIsScoped = useIsScoped;
 exports.useIsUrl = useIsUrl;
 exports.useLaunchFullscreen = useLaunchFullscreen;
 exports.useLocalCache = useLocalCache;
 exports.useMoneyFormat = useMoneyFormat;
 exports.useRedirect = useRedirect;
+exports.useScopedRegex = useScopedRegex;
 exports.useScrollToTop = useScrollToTop;
 exports.useSearchParams = useSearchParams;
 exports.useSessionCache = useSessionCache;
