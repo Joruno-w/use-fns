@@ -23,7 +23,7 @@ import fns from "use-fns";
 Determine the type of variable
 
 ```ts
-declare function useTypeOf(v:any): string;
+declare function useTypeOf(v: any): string;
 ```
 
 ```ts
@@ -121,10 +121,10 @@ declare function useTurnCase(str: string, type: number): void;
 
 ```ts
 import { useTurnCase } from "use-fns";
-const upper = useTurnCase('aBc',1); // ABC
-const lower = useTurnCase('aBc',2); // abc
-const capital = useTurnCase('aBc',3); // ABc
-const original = useTurnCase('aBc',4); // aBc
+const upper = useTurnCase("aBc", 1); // ABC
+const lower = useTurnCase("aBc", 2); // abc
+const capital = useTurnCase("aBc", 3); // ABc
+const original = useTurnCase("aBc", 4); // aBc
 ```
 
 ### useSearchParams
@@ -138,7 +138,7 @@ declare function useSearchParams(): Record<string, string>;
 ```ts
 import { useSearchParams } from "use-fns";
 // if location.search = '?a=1&b=2'
-const params = useSearchParams() // {a: 1,b: 2}
+const params = useSearchParams(); // {a: 1,b: 2}
 ```
 
 ### useSysType
@@ -146,32 +146,165 @@ const params = useSearchParams() // {a: 1,b: 2}
 Get current terminal type
 
 ```ts
-declare function useSysType():void;
+declare function useSysType(): void;
 ```
 
 ```ts
 import { useSysType } from "use-fns";
-const sys = useSysType() // 'ios' | 'android' | ''
+const sys = useSysType(); // 'ios' | 'android' | ''
 ```
 
 ### useUniqueArrObj
 
+Array objects are deduplicated according to fields
 
-### useScrollToTop,
+```ts
+declare function useUniqueArrObj<T extends Record<string, any>, U extends T[]>(
+  arr: U,
+  k: keyof T
+): void;
+```
 
-### useSmoothScroll,
+```ts
+import { useUniqueArrObj } from "use-fns";
+const uniqueArr = useUniqueArrObj(
+  [
+    { name: "Joruno", age: 22 },
+    { name: "hanchen", age: 22 },
+    { name: "old man", age: 21 },
+  ],
+  "age"
+);
+/**
+ * [
+ *    {name: 'Joruno', age: 22},
+ *    {name: 'old man', age: 21},
+ * ]
+ */
+```
 
-### useUUID,
+### useScrollToTop
 
-### useMoneyFormat,
+Scroll to top of page
 
-### useLocalCache,
+```ts
+declare function useScrollToTop(): void;
+```
 
-### useSessionCache,
+```ts
+import { useScrollToTop } from "use-fns";
+useScrollToTop();
+```
 
-### useFuzzyQuery,
+### useSmoothScroll
 
-### useForeachTree,
+Scroll to element position
+
+```ts
+declare function useSmoothScroll(selector: string = "body"): void;
+```
+
+```ts
+import { useSmoothScroll } from "use-fns";
+useSmoothScroll("#form");
+```
+
+### useUUID
+
+Generate uuid
+
+```ts
+declare function useUUID(): void;
+```
+
+```ts
+import { useUUID } from "use-fns";
+const uuid = useUUID(); // 'e728a1e4-dd9c-4e3f-a747-8ca67985e293'
+```
+
+### useMoneyFormat
+
+Money format
+
+```ts
+declare function useMoneyFormat(): void;
+```
+
+```ts
+import { useMoneyFormat } from "use-fns";
+const res = useMoneyFormat();
+```
+
+### useLocalCache
+
+automatic serialization localStorage
+
+```ts
+declare function useLocalCache(): void;
+```
+
+```ts
+import { useLocalCache } from "use-fns";
+useLocalCache.setItem("person", { name: "Joruno", age: 22 });
+useLocalCache.getItem("person");
+useLocalCache.removeItem("person");
+useLocalCache.clear();
+useLocalCache.key(0);
+useLocalCache.length();
+```
+
+### useSessionCache
+
+automatic serialization sessionStorage
+
+```ts
+declare function useSessionCache(): void;
+```
+
+```ts
+import { useSessionCache } from "use-fns";
+useSessionCache.setItem("person", { name: "Joruno", age: 22 });
+useSessionCache.getItem("person");
+useSessionCache.removeItem("person");
+useSessionCache.clear();
+useSessionCache.key(0);
+useSessionCache.length();
+```
+
+### useFuzzyQuery
+
+Fuzz query
+
+```ts
+declare function useFuzzyQuery<T extends Record<string, any>, U extends T[]>(
+  list: U,
+  keyWord: string,
+  attr: keyof T
+): void;
+```
+
+```ts
+import { useFuzzyQuery } from "use-fns";
+useFuzzyQuery(
+  [
+    { name: "Joruno", age: 22 },
+    { name: "hanchen", age: 22 },
+    { name: "old man", age: 21 },
+  ],
+  "o",
+  "name"
+);
+/**
+ * [
+ *    {name: 'Joruno', age: 22},
+ *    {name: 'old man', age: 21},
+ * ]
+ */
+```
+
+### useForeachTree
+
+Foreach tree node
 
 ### useCharacterCount,
 

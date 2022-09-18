@@ -225,7 +225,7 @@ const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
   keyWord: string,
   attr: K
 ) => {
-  const reg = new RegExp(keyWord);
+  const reg = new RegExp(keyWord,'i');
   return list.reduce(
     (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
     [] as unknown[]
