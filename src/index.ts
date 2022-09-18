@@ -431,3 +431,5 @@ export {
   useScopedRegex,
   useIsScoped 
 } 
+
+module.exports = pkg
