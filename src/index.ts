@@ -279,7 +279,7 @@ const useInsertHTMLAfter = (html: string, el: Element) =>
 const useShuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
 
 // 在网页上获取选定的文本
-const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
+const useGetSelectedText = () => window.getSelection()?.toString() || "";
 
 // 获取随机布尔值
 const useGetRandomBoolean = () => Math.random() >= 0.5;
@@ -311,6 +311,7 @@ const useIsUrl = (
   }
 };
 
+// 将git地址转成github地址
 const useGithubUrlFromGit = (
   url: string,
   opts: Record<string, any> = {}
@@ -340,6 +341,7 @@ const useGithubUrlFromGit = (
   }
 };
 
+// 返回验证npm scoped的正则
 const useScopedRegex = (options: { exact?: boolean } = {}) => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact
@@ -347,9 +349,11 @@ const useScopedRegex = (options: { exact?: boolean } = {}) => {
     : new RegExp(regex, "gi");
 };
 
+// 检测字符串是不是npm scoped
 const useIsScoped = (s: string) => {
   return useScopedRegex({ exact: true }).test(s);
 };
+
 
 const pkg = { 
   useTypeOf,
