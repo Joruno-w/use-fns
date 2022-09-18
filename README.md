@@ -304,8 +304,6 @@ useFuzzyQuery(
 
 ### useForeachTree
 
-Foreach tree node
-
 ### useCharacterCount,
 
 ### useIsEmptyObj,
