@@ -182,7 +182,7 @@ const useRedirect = (url) => location.href = url;
 const useTouchSupported = () => "ontouchstart" in window || DocumentTouch && document instanceof DocumentTouch;
 const useInsertHTMLAfter = (html, el) => el.insertAdjacentHTML("afterend", html);
 const useShuffle = (arr) => arr.sort(() => Math.random() - 0.5);
-const useGetSelectedText = () => window.getSelection()?.toString() ?? "";
+const useGetSelectedText = () => window.getSelection()?.toString() || "";
 const useGetRandomBoolean = () => Math.random() >= 0.5;
 const useSum = (arr) => arr.reduce((a, b) => a + b);
 const useAverage = (arr) => useSum(arr) / arr.length;
