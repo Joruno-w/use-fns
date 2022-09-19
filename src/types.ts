@@ -1,4 +1,3 @@
-export type NormalKeys = keyof any
 export interface Ele extends Element {
   requestFullscreen: (options?: FullscreenOptions) => Promise<void>;
   mozRequestFullscreen?: (options?: FullscreenOptions) => Promise<void>;

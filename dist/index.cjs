@@ -9,8 +9,7 @@ function useToggle(arr, order = "asc", start = 0, end = arr.length) {
   const values = arr.slice(start, end).map((m) => vue.unref(m));
   const len = values.length;
   let i = order === "asc" ? start : order === "desc" ? end - 1 : Math.random() * (len - 1) | 0;
-  let v = vue.ref();
-  v.value = values[i];
+  let v = vue.ref(values[i]);
   const toggle = (params = paramsSymbol) => {
     if (params !== paramsSymbol) {
       v.value = params;
@@ -269,12 +268,12 @@ const useGithubUrlFromGit = (url, opts = {}) => {
     return "";
   }
 };
-const useScopedRegex = (options = {}) => {
+const scopedRegex = (options = {}) => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact ? new RegExp(`^${regex}$`, "i") : new RegExp(regex, "gi");
 };
 const useIsScoped = (s) => {
-  return useScopedRegex({ exact: true }).test(s);
+  return scopedRegex({ exact: true }).test(s);
 };
 const pkg = {
   useTypeOf,
@@ -309,7 +308,6 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useScopedRegex,
   useIsScoped
 };
 module.exports = pkg;
@@ -336,7 +334,6 @@ exports.useLaunchFullscreen = useLaunchFullscreen;
 exports.useLocalCache = useLocalCache;
 exports.useMoneyFormat = useMoneyFormat;
 exports.useRedirect = useRedirect;
-exports.useScopedRegex = useScopedRegex;
 exports.useScrollToTop = useScrollToTop;
 exports.useSearchParams = useSearchParams;
 exports.useSessionCache = useSessionCache;

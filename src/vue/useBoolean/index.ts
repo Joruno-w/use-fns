@@ -1,8 +1,8 @@
-import type { Ref } from "vue";
+import { Ref } from "vue";
 import useToggle from "../useToggle";
 
 interface UseBooleanReturn {
-  v: Ref<boolean | undefined>;
+  v: Ref<boolean>;
   toggle: () => void;
   setTrue: () => void;
   setFalse: () => void;

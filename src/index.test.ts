@@ -1,13 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { expectType } from "tsd";
 import { resolve } from "node:path";
-import * as fns from './'
+import * as fns from '.'
 
-describe("Get All Export keys", () => {
+describe.concurrent("Get All Export keys", () => {
   it("exports", async () => {
-    expect(Object.keys(await import(resolve(process.cwd(), "./src/index.ts"))))
+    expect(Object.keys(await import(resolve(__dirname, "./index.ts"))))
       .toMatchInlineSnapshot(`
         [
+          "useBoolean",
+          "useToggle",
           "default",
           "useTypeOf",
           "useDebounce",
@@ -40,12 +42,14 @@ describe("Get All Export keys", () => {
           "useSum",
           "useAverage",
           "useIsUrl",
+          "useGithubUrlFromGit",
+          "useIsScoped",
         ]
       `);
   });
 });
 
-describe("test each function output", () => {
+describe.concurrent("test each function output", () => {
   it("useIsUrl", () => {
     expect(fns.useIsUrl("https://github.com")).toBe(true);
     expect(fns.useIsUrl("github.com")).toBe(false);
@@ -53,7 +57,7 @@ describe("test each function output", () => {
   });
 });
 
-describe("test each function type declare", () => {
+describe.concurrent("test each function type declare", () => {
   it("useIsUrl", () => {
     expectType<boolean>(fns.useIsUrl("https://github.com"))
     expectType<boolean>(fns.useIsUrl("github.com"))

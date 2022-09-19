@@ -14,10 +14,8 @@ interface MoneyFormatParams {
     thousands_sep?: string;
 }
 
-declare type MaybeRef<T> = T | Ref<T>;
-
 interface UseBooleanReturn {
-    v: Ref<boolean | undefined>;
+    v: Ref<boolean>;
     toggle: () => void;
     setTrue: () => void;
     setFalse: () => void;
@@ -29,10 +27,11 @@ interface UseBooleanReturn {
  */
 declare function useBoolean(value?: boolean): UseBooleanReturn;
 
+declare type MaybeRef<T> = T | Ref<T>;
 declare type orderType = "asc" | "desc" | "random";
 interface UseToggleReturn<T> {
     i: number;
-    v: Ref<T | undefined>;
+    v: Ref<T>;
     values: T[];
     toggle: (v?: any) => void;
 }
@@ -47,7 +46,7 @@ declare const useExitFullscreen: () => void;
 declare const useTurnCase: (str: string, type: number) => string;
 declare const useSearchParams: () => Record<string, string>;
 declare const useSysType: () => "ios" | "android" | "";
-declare const useUniqueArrObj: <T extends Record<string | number | symbol, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
+declare const useUniqueArrObj: <T extends Record<string, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
 declare const useScrollToTop: () => void;
 declare const useSmoothScroll: (selector: QuerySelector) => void;
 declare const useUUID: () => string;
@@ -64,10 +63,10 @@ declare class MyCache {
 }
 declare const useLocalCache: MyCache;
 declare const useSessionCache: MyCache;
-declare const useFuzzyQuery: <T extends Record<string | number | symbol, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
-declare const useForeachTree: <T extends Record<string | number | symbol, any>, K extends keyof T>(data: T[], cb: Function, childrenName: K) => void;
+declare const useFuzzyQuery: <T extends Record<string, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
+declare const useForeachTree: <T extends Record<string, any>>(data: T[], cb: Function, childrenName: keyof T) => void;
 declare const useCharacterCount: (str: string, char: string) => number;
-declare const useIsEmptyObj: <T extends Record<string | number | symbol, any>>(obj: T) => boolean;
+declare const useIsEmptyObj: <T extends Record<string, any>>(obj: T) => boolean;
 declare const useDelay: (ms: number) => Promise<unknown>;
 declare const useDaysBetween: (d1: number, d2: number) => number;
 declare const useRedirect: (url: string) => string;
@@ -82,9 +81,6 @@ declare const useIsUrl: (url: string, { lenient }?: {
     readonly lenient?: boolean | undefined;
 }) => boolean;
 declare const useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
-declare const useScopedRegex: (options?: {
-    exact?: boolean;
-}) => RegExp;
 declare const useIsScoped: (s: string) => boolean;
 
 declare const pkg: {
@@ -97,17 +93,17 @@ declare const pkg: {
     useTurnCase: (str: string, type: number) => string;
     useSearchParams: () => Record<string, string>;
     useSysType: () => "ios" | "android" | "";
-    useUniqueArrObj: <T extends Record<string | number | symbol, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
+    useUniqueArrObj: <T extends Record<string, any>, U extends T[]>(arr: U, key: keyof T) => unknown[] | undefined;
     useScrollToTop: () => void;
     useSmoothScroll: (selector: QuerySelector) => void;
     useUUID: () => string;
     useMoneyFormat: ({ number, decimals, dec_point: dec, thousands_sep: sep, }: MoneyFormatParams) => string;
     useLocalCache: MyCache;
     useSessionCache: MyCache;
-    useFuzzyQuery: <T_1 extends Record<string | number | symbol, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => unknown[];
-    useForeachTree: <T_2 extends Record<string | number | symbol, any>, K_1 extends keyof T_2>(data: T_2[], cb: Function, childrenName: K_1) => void;
+    useFuzzyQuery: <T_1 extends Record<string, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => unknown[];
+    useForeachTree: <T_2 extends Record<string, any>>(data: T_2[], cb: Function, childrenName: keyof T_2) => void;
     useCharacterCount: (str: string, char: string) => number;
-    useIsEmptyObj: <T_3 extends Record<string | number | symbol, any>>(obj: T_3) => boolean;
+    useIsEmptyObj: <T_3 extends Record<string, any>>(obj: T_3) => boolean;
     useDelay: (ms: number) => Promise<unknown>;
     useDaysBetween: (d1: number, d2: number) => number;
     useRedirect: (url: string) => string;
@@ -122,10 +118,7 @@ declare const pkg: {
         readonly lenient?: boolean | undefined;
     }) => boolean;
     useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
-    useScopedRegex: (options?: {
-        exact?: boolean;
-    }) => RegExp;
     useIsScoped: (s: string) => boolean;
 };
 
-export { MaybeRef, pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

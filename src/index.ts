@@ -1,5 +1,4 @@
 import type {
-  NormalKeys,
   Doc,
   Ele,
   QuerySelector,
@@ -106,7 +105,7 @@ const useSysType = () => {
 // 数组对象根据字段去重
 // arr 要去重的数组
 // key 根据去重的字段名
-const useUniqueArrObj = <T extends Record<NormalKeys, any>, U extends T[]>(
+const useUniqueArrObj = <T extends Record<string, any>, U extends T[]>(
   arr: U,
   key: keyof T
 ) => {
@@ -220,7 +219,7 @@ const useSessionCache = new MyCache(false);
 // list 原数组
 // keyWord 查询的关键词
 // attribute 数组需要检索属性
-const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
+const useFuzzyQuery = <T extends Record<string, any>, K extends keyof T>(
   list: T[],
   keyWord: string,
   attr: K
@@ -233,10 +232,10 @@ const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
 };
 
 // 遍历树节点
-const useForeachTree = <T extends Record<NormalKeys, any>, K extends keyof T>(
+const useForeachTree = <T extends Record<string, any>>(
   data: T[],
   cb: Function,
-  childrenName: K
+  childrenName: keyof T
 ) => {
   for (let i = 0; i < data.length; i++) {
     cb(data[i]);
@@ -247,11 +246,11 @@ const useForeachTree = <T extends Record<NormalKeys, any>, K extends keyof T>(
 };
 
 // 获取字符串中的字符数
-const useCharacterCount = (str: string, char: string) =>
+const useCharacterCount = (str: string, char: string): number =>
   str.split(char).length - 1;
 
 // 检查对象是否为空
-const useIsEmptyObj = <T extends Record<NormalKeys, any>>(obj: T) =>
+const useIsEmptyObj = <T extends Record<string, any>>(obj: T): boolean =>
   Reflect.ownKeys(obj).length === 0 && obj.constructor === Object;
 
 // 等待一段时间再执行
@@ -259,7 +258,7 @@ const useDelay = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 // 获取两个日期之间的日差
-const useDaysBetween = (d1: number, d2: number) =>
+const useDaysBetween = (d1: number, d2: number): number =>
   Math.ceil(Math.abs(d1 - d2) / (1000 * 60 * 60 * 24));
 
 // 重定向到另一个 URL
@@ -342,7 +341,7 @@ const useGithubUrlFromGit = (
 };
 
 // 返回验证npm scoped的正则
-const useScopedRegex = (options: { exact?: boolean } = {}) => {
+const scopedRegex = (options: { exact?: boolean } = {}) => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact
     ? new RegExp(`^${regex}$`, "i")
@@ -351,7 +350,7 @@ const useScopedRegex = (options: { exact?: boolean } = {}) => {
 
 // 检测字符串是不是npm scoped
 const useIsScoped = (s: string) => {
-  return useScopedRegex({ exact: true }).test(s);
+  return scopedRegex({ exact: true }).test(s);
 };
 
 export * from './vue'
@@ -389,7 +388,6 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useScopedRegex,
   useIsScoped 
 }
 
@@ -428,7 +426,6 @@ export {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useScopedRegex,
   useIsScoped 
 } 
 
