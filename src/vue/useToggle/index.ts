@@ -1,13 +1,13 @@
 import { Ref, ref, unref } from "vue";
-import { MaybeRef } from "../types";
 
+type MaybeRef<T> = T | Ref<T>;
 type orderType = "asc" | "desc" | "random";
 
 const paramsSymbol: unique symbol = Symbol("paramsSymbol");
 
 interface UseToggleReturn<T> {
   i: number;
-  v: Ref<T | undefined>;
+  v: Ref<T>;
   values: T[];
   toggle: (v?: any) => void;
 }
@@ -22,8 +22,7 @@ function useToggle<T extends any>(
   const values = arr.slice(start,end).map((m) => unref(m));
   const len = values.length;
   let i = order === 'asc' ? start : order === 'desc' ? end - 1 : (Math.random() * (len - 1)) | 0;
-  let v = ref<T>();
-  v.value = values[i]
+  let v = ref( values[i]);
 
   const toggle = (params: any = paramsSymbol) => {
     if (params !== paramsSymbol) {
@@ -33,20 +32,24 @@ function useToggle<T extends any>(
     switch (order) {
       case "asc":
         i = (i + 1) % len;
+        // @ts-ignore
         v.value = values[i];
         break;
       case "desc":
         i = (i + len - 1) % len;
+        // @ts-ignore
         v.value = values[i];
         break;
       case "random":
         i = (Math.random() * (len - 1)) | 0;
+        // @ts-ignore
         v.value = values[i];
     }
   };
 
   return {
     i,
+    // @ts-ignore
     v,
     values,
     toggle,

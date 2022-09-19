@@ -1,7 +1,7 @@
 {
   "name": "use-fns",
   "type": "module",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "packageManager": "pnpm@7.9.5",
   "description": "",
   "author": "Joruno-w <1710642275@qq.com>",
@@ -50,7 +50,7 @@
     "dist"
   ],
   "scripts": {
-    "u": "esno ./src/updateVersion.ts",    
+    "u": "esno ./src/updateVersion.ts",
     "e": "esno ./src/exports.ts",
     "build": "unbuild",
     "dev": "unbuild --stub",
@@ -78,10 +78,6 @@
     "vitest": "^0.22.0"
   },
   "dependencies": {
-    "got": "^12.4.1",
-    "registry-auth-token": "^5.0.1",
-    "registry-url": "^6.0.1",
-    "semver": "^7.3.7",
     "vue": "^3.2.39"
   }
 }

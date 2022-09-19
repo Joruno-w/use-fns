@@ -14,10 +14,8 @@ interface MoneyFormatParams {
     thousands_sep?: string;
 }
 
-declare type MaybeRef<T> = T | Ref<T>;
-
 interface UseBooleanReturn {
-    v: Ref<boolean | undefined>;
+    v: Ref<boolean>;
     toggle: () => void;
     setTrue: () => void;
     setFalse: () => void;
@@ -29,10 +27,11 @@ interface UseBooleanReturn {
  */
 declare function useBoolean(value?: boolean): UseBooleanReturn;
 
+declare type MaybeRef<T> = T | Ref<T>;
 declare type orderType = "asc" | "desc" | "random";
 interface UseToggleReturn<T> {
     i: number;
-    v: Ref<T | undefined>;
+    v: Ref<T>;
     values: T[];
     toggle: (v?: any) => void;
 }
@@ -82,9 +81,6 @@ declare const useIsUrl: (url: string, { lenient }?: {
     readonly lenient?: boolean | undefined;
 }) => boolean;
 declare const useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
-declare const useScopedRegex: (options?: {
-    exact?: boolean;
-}) => RegExp;
 declare const useIsScoped: (s: string) => boolean;
 
 declare const pkg: {
@@ -122,10 +118,7 @@ declare const pkg: {
         readonly lenient?: boolean | undefined;
     }) => boolean;
     useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
-    useScopedRegex: (options?: {
-        exact?: boolean;
-    }) => RegExp;
     useIsScoped: (s: string) => boolean;
 };
 
-export { MaybeRef, pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

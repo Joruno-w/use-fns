@@ -2,7 +2,7 @@
 
 Some utility functions prefixed with use
 
-[![NPM version](https://img.shields.io/badge/npm-1.0.18-brightgreen)](https://www.npmjs.com/package/use-fns)
+[![NPM version](https://img.shields.io/badge/npm-1.0.19-brightgreen)](https://www.npmjs.com/package/use-fns)
 
 ## Install
 
@@ -175,6 +175,7 @@ const uniqueArr = useUniqueArrObj(
   ],
   "age"
 );
+
 /**
  * [
  *    {name: 'Joruno', age: 22},
@@ -294,6 +295,7 @@ useFuzzyQuery(
   "o",
   "name"
 );
+
 /**
  * [
  *    {name: 'Joruno', age: 22},
@@ -304,37 +306,256 @@ useFuzzyQuery(
 
 ### useForeachTree
 
-### useCharacterCount,
+foreach all tree node
 
-### useIsEmptyObj,
+```ts
+declare function useForeachTree<T extends Record<string, any>>(data: T[],cb: Function, childrenName:keyof T): void;
+```
 
-### useDelay,
+```ts
+import { useForeachTree } from "use-fns";
+useForeachTree(
+  [
+    { 
+      name: "Joruno", 
+      age: 22,
+      children: [
+          { 
+            name: "hanchen",
+            age: 22
+          },
+          { 
+            name: "old man", 
+            age: 21
+          }
+      ]
+    }
+  ],
+  console.log,
+  'children'
+);
 
-### useDaysBetween,
+/**
+ * 
+ * {
+ *    name: 'Joruno',
+ *    age: 22,
+ *    children: [ 
+ *      { name: 'hanchen', age: 22 }, 
+ *      { name: 'old  man', age: 21 } 
+ *    ]
+ * },
+ *
+ * { name: 'hanchen', age: 22 },
+ *
+ * { name: 'old man', age: 21 }
+ * 
+ */
+```
 
-### useRedirect,
+### useCharacterCount
 
-### useTouchSupported,
+Get the number of characters in a string
 
-### useInsertHTMLAfter,
+```ts
+declare function useCharacterCount(s: string, char: string): number;
+```
 
-### useShuffle,
+```ts
+import { useCharacterCount } from "use-fns";
+const count = useCharacterCount('Joruno','o') // 2
+```
 
-### useGetSelectedText,
+### useIsEmptyObj
 
-### useGetRandomBoolean,
+Check if object is empty
 
-### useSum,
+```ts
+declare function useIsEmptyObj<T extends Record<string, any>(obj: T): boolean;
+```
 
-### useAverage,
+```ts
+import { useIsEmptyObj } from "use-fns";
+useIsEmptyObj({}) // true
+useIsEmptyObj({a: 1}) // false
+```
 
-### useIsUrl,
+### useDelay
 
-### useGithubUrlFromGit,
+Wait for a while before calling function
 
-### useScopedRegex,
+```ts
+declare function useDelay(ms: number): Promise<void>;
+```
+
+```ts
+import { useDelay } from "use-fns";
+await useDelay(1000) // Wait for one second
+```
+
+### useDaysBetween
+
+Get the day difference between two dates
+
+```ts
+declare function useDaysBetween(d1:number, d2: number): number;
+```
+
+```ts
+import { useDaysBetween } from "use-fns";
+const timeStamp = Date.now()
+useDaysBetween(timeStamp,timeStamp + 3600 * 1000 * 24 * 7) // 7
+```
+
+### useRedirect
+
+Redirect to another URL
+
+```ts
+declare function useRedirect(url: string): string;
+```
+
+```ts
+import { useRedirect } from "use-fns";
+useRedirect('https://github.com') // Redirect to github
+```
+
+### useTouchSupported
+
+Check for touch support on your device
+
+```ts
+declare function useTouchSupported(): boolean;
+```
+
+```ts
+import { useTouchSupported } from "use-fns";
+useTouchSupported() // true or false
+```
+
+### useInsertHTMLAfter
+
+Insert HTML string after element
+
+```ts
+declare function useInsertHTMLAfter(html: string, el: Element): void;
+```
+
+```ts
+import { useInsertHTMLAfter } from "use-fns";
+useInsertHTMLAfter('<div>useInsertHTMLAfter</div>',document.body)
+```
+
+### useShuffle
+
+Shuffle array
+
+```ts
+declare function useShuffle(arr: any[]): any[];
+```
+
+```ts
+import { useShuffle } from "use-fns";
+useShuffle([1,2]) // [1,2] or [2,1]
+```
+
+### useGetSelectedText
+
+Get selected text on webpage
+
+```ts
+declare function useGetSelectedText(): string;
+```
+
+```ts
+import { useGetSelectedText } from "use-fns";
+useGetSelectedText()
+```
+
+### useGetRandomBoolean
+
+Get random boolean
+
+```ts
+declare function useGetRandomBoolean(): boolean;
+```
+
+```ts
+import { useGetRandomBoolean } from "use-fns";
+useGetRandomBoolean() // true or false
+```
+
+### useSum
+
+Calculate the sum of an array
+
+```ts
+declare function useSum(arr: any[]): number;
+```
+
+```ts
+import { useSum } from "use-fns";
+useSum([]) // 0
+useSum([1,2]) // 3
+useSum([1,2,3]) // 6
+```
+
+### useAverage
+
+Calculate the average of an array
+
+```ts
+declare function useAverage(arr: any[]): number;
+```
+
+```ts
+import { useAverage } from "use-fns";
+useAverage([]) // 0
+useAverage([1,2]) // 1.5
+useAverage([1,2,3]) // 2
+```
+
+### useIsUrl
+
+Determine if a string is a valid URL
+
+```ts
+declare function useIsUrl(arr: any[],opts: {readonly lenient?: boolean} = {lenient: false}): boolean;
+```
+
+```ts
+import { useIsUrl } from "use-fns";
+useIsUrl('https://github.com') // true
+useIsUrl('github.com') // false;
+useIsUrl('github.com',{lenient: true}) // true
+```
+
+### useGithubUrlFromGit
+
+Convert git address to github address
+
+```ts
+declare function useGithubUrlFromGit(url: string,opts: Record<string,any> = {}): string;
+```
+
+```ts
+import { useGithubUrlFromGit } from "use-fns";
+useGithubUrlFromGit('git+https://github.com/Joruno-w/use-fns.git') // https://github.com/Joruno-w/use-fns
+```
 
 ### useIsScoped
+
+Check if a string is npm scoped
+
+```ts
+declare function useIsScoped(s: string): boolean;
+```
+
+```ts
+import { useIsScoped } from "use-fns";
+useIsScoped('@joruno/use-fns') // true
+useIsScoped('joruno/use-fns') // false
+```
 
 ## License
 

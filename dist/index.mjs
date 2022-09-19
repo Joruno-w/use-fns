@@ -5,8 +5,7 @@ function useToggle(arr, order = "asc", start = 0, end = arr.length) {
   const values = arr.slice(start, end).map((m) => unref(m));
   const len = values.length;
   let i = order === "asc" ? start : order === "desc" ? end - 1 : Math.random() * (len - 1) | 0;
-  let v = ref();
-  v.value = values[i];
+  let v = ref(values[i]);
   const toggle = (params = paramsSymbol) => {
     if (params !== paramsSymbol) {
       v.value = params;
@@ -206,7 +205,7 @@ class MyCache {
 const useLocalCache = new MyCache();
 const useSessionCache = new MyCache(false);
 const useFuzzyQuery = (list, keyWord, attr) => {
-  const reg = new RegExp(keyWord);
+  const reg = new RegExp(keyWord, "i");
   return list.reduce(
     (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
     []
@@ -265,12 +264,12 @@ const useGithubUrlFromGit = (url, opts = {}) => {
     return "";
   }
 };
-const useScopedRegex = (options = {}) => {
+const scopedRegex = (options = {}) => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact ? new RegExp(`^${regex}$`, "i") : new RegExp(regex, "gi");
 };
 const useIsScoped = (s) => {
-  return useScopedRegex({ exact: true }).test(s);
+  return scopedRegex({ exact: true }).test(s);
 };
 const pkg = {
   useTypeOf,
@@ -305,9 +304,8 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useScopedRegex,
   useIsScoped
 };
 module.exports = pkg;
 
-export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScopedRegex, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
