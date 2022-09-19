@@ -1,5 +1,4 @@
 import type {
-  NormalKeys,
   Doc,
   Ele,
   QuerySelector,
@@ -106,7 +105,7 @@ const useSysType = () => {
 // 数组对象根据字段去重
 // arr 要去重的数组
 // key 根据去重的字段名
-const useUniqueArrObj = <T extends Record<NormalKeys, any>, U extends T[]>(
+const useUniqueArrObj = <T extends Record<string, any>, U extends T[]>(
   arr: U,
   key: keyof T
 ) => {
@@ -220,7 +219,7 @@ const useSessionCache = new MyCache(false);
 // list 原数组
 // keyWord 查询的关键词
 // attribute 数组需要检索属性
-const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
+const useFuzzyQuery = <T extends Record<string, any>, K extends keyof T>(
   list: T[],
   keyWord: string,
   attr: K
@@ -233,10 +232,10 @@ const useFuzzyQuery = <T extends Record<NormalKeys, any>, K extends keyof T>(
 };
 
 // 遍历树节点
-const useForeachTree = <T extends Record<NormalKeys, any>, K extends keyof T>(
+const useForeachTree = <T extends Record<string, any>>(
   data: T[],
   cb: Function,
-  childrenName: K
+  childrenName: keyof T
 ) => {
   for (let i = 0; i < data.length; i++) {
     cb(data[i]);
@@ -251,7 +250,7 @@ const useCharacterCount = (str: string, char: string): number =>
   str.split(char).length - 1;
 
 // 检查对象是否为空
-const useIsEmptyObj = <T extends Record<NormalKeys, any>>(obj: T): boolean =>
+const useIsEmptyObj = <T extends Record<string, any>>(obj: T): boolean =>
   Reflect.ownKeys(obj).length === 0 && obj.constructor === Object;
 
 // 等待一段时间再执行

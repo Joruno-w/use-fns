@@ -2,7 +2,7 @@
 
 Some utility functions prefixed with use
 
-[![NPM version](https://img.shields.io/badge/npm-1.0.19-brightgreen)](https://www.npmjs.com/package/use-fns)
+[![NPM version](https://img.shields.io/badge/npm-1.0.20-brightgreen)](https://www.npmjs.com/package/use-fns)
 
 ## Install
 

@@ -32,14 +32,14 @@ describe.concurrent("useToggle", () => {
   });
   it("useToggle random", () => {
     const { v, toggle } = useToggle([1, 2, 3], "random");
-    console.log(v.value);
+    // console.log(v.value);
     toggle();
-    console.log(v.value);
+    // console.log(v.value);
     toggle();
-    console.log(v.value);
+    // console.log(v.value);
     toggle();
-    console.log(v.value);
+    // console.log(v.value);
     toggle();
-    console.log(v.value);
+    // console.log(v.value);
   });
 });

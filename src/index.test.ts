@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { expectType } from "tsd";
 import { resolve } from "node:path";
-import * as fns from './'
+import * as fns from '.'
 
 describe.concurrent("Get All Export keys", () => {
   it("exports", async () => {
-    expect(Object.keys(await import(resolve(process.cwd(), "./src/index.ts"))))
+    expect(Object.keys(await import(resolve(__dirname, "./index.ts"))))
       .toMatchInlineSnapshot(`
         [
           "useBoolean",
@@ -43,7 +43,6 @@ describe.concurrent("Get All Export keys", () => {
           "useAverage",
           "useIsUrl",
           "useGithubUrlFromGit",
-          "useScopedRegex",
           "useIsScoped",
         ]
       `);
