@@ -210,7 +210,7 @@ class MyCache {
 const useLocalCache = new MyCache();
 const useSessionCache = new MyCache(false);
 const useFuzzyQuery = (list, keyWord, attr) => {
-  const reg = new RegExp(keyWord);
+  const reg = new RegExp(keyWord, "i");
   return list.reduce(
     (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
     []
