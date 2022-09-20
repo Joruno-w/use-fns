@@ -20,11 +20,6 @@ interface UseBooleanReturn {
     setTrue: () => void;
     setFalse: () => void;
 }
-/**
- *
- * @param defaultValue
- * @returns
- */
 declare function useBoolean(value?: boolean): UseBooleanReturn;
 
 declare type MaybeRef<T> = T | Ref<T>;
