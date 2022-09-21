@@ -212,8 +212,8 @@ class MyCache {
   }
 }
 
-const useLocalCache = new MyCache();
-const useSessionCache = new MyCache(false);
+const useLocalCache = () => new MyCache();
+const useSessionCache = () => new MyCache(false);
 
 // 模糊搜索
 // list 原数组

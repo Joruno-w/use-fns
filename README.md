@@ -245,12 +245,13 @@ declare function useLocalCache(): void;
 
 ```ts
 import { useLocalCache } from "use-fns";
-useLocalCache.setItem("person", { name: "Joruno", age: 22 });
-useLocalCache.getItem("person");
-useLocalCache.removeItem("person");
-useLocalCache.clear();
-useLocalCache.key(0);
-useLocalCache.length();
+const local = useLocalCache();
+local.setItem("person", { name: "Joruno", age: 22 });
+local.getItem("person");
+local.removeItem("person");
+local.clear();
+local.key(0);
+local.length();
 ```
 
 ### useSessionCache
@@ -263,12 +264,13 @@ declare function useSessionCache(): void;
 
 ```ts
 import { useSessionCache } from "use-fns";
-useSessionCache.setItem("person", { name: "Joruno", age: 22 });
-useSessionCache.getItem("person");
-useSessionCache.removeItem("person");
-useSessionCache.clear();
-useSessionCache.key(0);
-useSessionCache.length();
+const session = useSessionCache();
+session.setItem("person", { name: "Joruno", age: 22 });
+session.getItem("person");
+session.removeItem("person");
+session.clear();
+session.key(0);
+session.length();
 ```
 
 ### useFuzzyQuery
