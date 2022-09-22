@@ -206,8 +206,8 @@ class MyCache {
     return this.storage.length;
   }
 }
-const useLocalCache = new MyCache();
-const useSessionCache = new MyCache(false);
+const useLocalCache = () => new MyCache();
+const useSessionCache = () => new MyCache(false);
 const useFuzzyQuery = (list, keyWord, attr) => {
   const reg = new RegExp(keyWord, "i");
   return list.reduce(
@@ -310,7 +310,6 @@ const pkg = {
   useGithubUrlFromGit,
   useIsScoped
 };
-module.exports = pkg;
 
 exports["default"] = pkg;
 exports.useAverage = useAverage;
