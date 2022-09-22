@@ -427,6 +427,4 @@ export {
   useIsUrl,
   useGithubUrlFromGit,
   useIsScoped 
-} 
-
-module.exports = pkg
+}

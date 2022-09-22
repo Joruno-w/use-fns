@@ -26,7 +26,7 @@ const allExports = `{ ${str.substring(0, str.length - 1)} \n}`;
     flag: "a",
   });
   await fs.writeFile(filename, `export ${allExports} \n\n`, { flag: "a" });
-  await fs.writeFile(filename, `module.exports = ${exportsName}`, {
-    flag: "a",
-  });
+  // await fs.writeFile(filename, `module.exports = ${exportsName}`, {
+  //   flag: "a",
+  // });
 })();
