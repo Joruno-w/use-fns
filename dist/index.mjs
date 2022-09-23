@@ -202,8 +202,8 @@ class MyCache {
     return this.storage.length;
   }
 }
-const useLocalCache = new MyCache();
-const useSessionCache = new MyCache(false);
+const useLocalCache = () => new MyCache();
+const useSessionCache = () => new MyCache(false);
 const useFuzzyQuery = (list, keyWord, attr) => {
   const reg = new RegExp(keyWord, "i");
   return list.reduce(
@@ -306,6 +306,5 @@ const pkg = {
   useGithubUrlFromGit,
   useIsScoped
 };
-module.exports = pkg;
 
 export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

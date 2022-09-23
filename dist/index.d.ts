@@ -56,8 +56,8 @@ declare class MyCache {
     key(index: number): string | null;
     length(): number;
 }
-declare const useLocalCache: MyCache;
-declare const useSessionCache: MyCache;
+declare const useLocalCache: () => MyCache;
+declare const useSessionCache: () => MyCache;
 declare const useFuzzyQuery: <T extends Record<string, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
 declare const useForeachTree: <T extends Record<string, any>>(data: T[], cb: Function, childrenName: keyof T) => void;
 declare const useCharacterCount: (str: string, char: string) => number;
@@ -93,8 +93,8 @@ declare const pkg: {
     useSmoothScroll: (selector: QuerySelector) => void;
     useUUID: () => string;
     useMoneyFormat: ({ number, decimals, dec_point: dec, thousands_sep: sep, }: MoneyFormatParams) => string;
-    useLocalCache: MyCache;
-    useSessionCache: MyCache;
+    useLocalCache: () => MyCache;
+    useSessionCache: () => MyCache;
     useFuzzyQuery: <T_1 extends Record<string, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => unknown[];
     useForeachTree: <T_2 extends Record<string, any>>(data: T_2[], cb: Function, childrenName: keyof T_2) => void;
     useCharacterCount: (str: string, char: string) => number;

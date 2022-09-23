@@ -1,5 +1,5 @@
 import { expectType } from "tsd";
-import fns from "./";
+import fns from ".";
 
 // TODO
 expectType<boolean>(fns.useIsUrl("https://github.com"));
