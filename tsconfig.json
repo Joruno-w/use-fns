@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/demo.js", "src/index.test.ts"]
+  "include": ["src/**/*.ts", "src/index.test.ts"]
 }
