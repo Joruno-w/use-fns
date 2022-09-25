@@ -223,11 +223,11 @@ const useFuzzyQuery = <T extends Record<string, any>, K extends keyof T>(
   list: T[],
   keyWord: string,
   attr: K
-) => {
+): T[] => {
   const reg = new RegExp(keyWord,'i');
   return list.reduce(
     (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
-    [] as unknown[]
+    [] as T[]
   );
 };
 
@@ -254,7 +254,7 @@ const useIsEmptyObj = <T extends Record<string, any>>(obj: T): boolean =>
   Reflect.ownKeys(obj).length === 0 && obj.constructor === Object;
 
 // 等待一段时间再执行
-const useDelay = async (ms: number) =>
+const useDelay = async (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 // 获取两个日期之间的日差
@@ -262,7 +262,7 @@ const useDaysBetween = (d1: number, d2: number): number =>
   Math.ceil(Math.abs(d1 - d2) / (1000 * 60 * 60 * 24));
 
 // 重定向到另一个 URL
-const useRedirect = (url: string) => (location.href = url);
+const useRedirect = (url: string): string => (location.href = url);
 
 // 检查设备上的触摸支持
 const useTouchSupported = () =>
@@ -271,11 +271,11 @@ const useTouchSupported = () =>
   (DocumentTouch && document instanceof DocumentTouch);
 
 // 在元素后插入 HTML 字符串
-const useInsertHTMLAfter = (html: string, el: Element) =>
+const useInsertHTMLAfter = (html: string, el: Element): void =>
   el.insertAdjacentHTML("afterend", html);
 
 // 随机排列数组
-const useShuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
+const useShuffle = (arr: any[]): any[] => arr.sort(() => Math.random() - 0.5);
 
 // 在网页上获取选定的文本
 const useGetSelectedText = () => window.getSelection()?.toString() || "";
@@ -341,7 +341,7 @@ const useGithubUrlFromGit = (
 };
 
 // 返回验证npm scoped的正则
-const scopedRegex = (options: { exact?: boolean } = {}) => {
+const scopedRegex = (options: { exact?: boolean } = {}) : RegExp => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact
     ? new RegExp(`^${regex}$`, "i")
@@ -349,7 +349,7 @@ const scopedRegex = (options: { exact?: boolean } = {}) => {
 };
 
 // 检测字符串是不是npm scoped
-const useIsScoped = (s: string) => {
+const useIsScoped = (s: string):boolean => {
   return scopedRegex({ exact: true }).test(s);
 };
 
