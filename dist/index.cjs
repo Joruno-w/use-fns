@@ -231,8 +231,8 @@ const useInsertHTMLAfter = (html, el) => el.insertAdjacentHTML("afterend", html)
 const useShuffle = (arr) => arr.sort(() => Math.random() - 0.5);
 const useGetSelectedText = () => window.getSelection()?.toString() || "";
 const useGetRandomBoolean = () => Math.random() >= 0.5;
-const useSum = (arr) => arr.reduce((a, b) => a + b);
-const useAverage = (arr) => useSum(arr) / arr.length;
+const useSum = (arr) => arr.reduce((a, b) => a + b, 0);
+const useAverage = (arr) => useSum(arr) / (arr.length || 1);
 const useIsUrl = (url, { lenient = false } = {}) => {
   if (typeof url !== "string") {
     throw new TypeError("Expected a string");

@@ -58,11 +58,11 @@ declare class MyCache {
 }
 declare const useLocalCache: () => MyCache;
 declare const useSessionCache: () => MyCache;
-declare const useFuzzyQuery: <T extends Record<string, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => unknown[];
+declare const useFuzzyQuery: <T extends Record<string, any>, K extends keyof T>(list: T[], keyWord: string, attr: K) => T[];
 declare const useForeachTree: <T extends Record<string, any>>(data: T[], cb: Function, childrenName: keyof T) => void;
 declare const useCharacterCount: (str: string, char: string) => number;
 declare const useIsEmptyObj: <T extends Record<string, any>>(obj: T) => boolean;
-declare const useDelay: (ms: number) => Promise<unknown>;
+declare const useDelay: (ms: number) => Promise<void>;
 declare const useDaysBetween: (d1: number, d2: number) => number;
 declare const useRedirect: (url: string) => string;
 declare const useTouchSupported: () => any;
@@ -95,11 +95,11 @@ declare const pkg: {
     useMoneyFormat: ({ number, decimals, dec_point: dec, thousands_sep: sep, }: MoneyFormatParams) => string;
     useLocalCache: () => MyCache;
     useSessionCache: () => MyCache;
-    useFuzzyQuery: <T_1 extends Record<string, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => unknown[];
+    useFuzzyQuery: <T_1 extends Record<string, any>, K extends keyof T_1>(list: T_1[], keyWord: string, attr: K) => T_1[];
     useForeachTree: <T_2 extends Record<string, any>>(data: T_2[], cb: Function, childrenName: keyof T_2) => void;
     useCharacterCount: (str: string, char: string) => number;
     useIsEmptyObj: <T_3 extends Record<string, any>>(obj: T_3) => boolean;
-    useDelay: (ms: number) => Promise<unknown>;
+    useDelay: (ms: number) => Promise<void>;
     useDaysBetween: (d1: number, d2: number) => number;
     useRedirect: (url: string) => string;
     useTouchSupported: () => any;
