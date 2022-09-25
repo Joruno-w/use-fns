@@ -23,6 +23,7 @@ interface UseBooleanReturn {
 declare function useBoolean(value?: boolean): UseBooleanReturn;
 
 declare type MaybeRef<T> = T | Ref<T>;
+
 declare type orderType = "asc" | "desc" | "random";
 interface UseToggleReturn<T> {
     i: number;

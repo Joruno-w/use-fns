@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import useToggle from "./index";
+import useToggle from ".";
 
 describe.concurrent("useToggle", () => {
   it("useToggle asc", () => {

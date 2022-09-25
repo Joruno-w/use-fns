@@ -1,7 +1,7 @@
 {
   "name": "use-fns",
   "type": "module",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "packageManager": "pnpm@7.9.5",
   "description": "",
   "author": "Joruno-w <1710642275@qq.com>",
@@ -78,6 +78,7 @@
     "vitest": "^0.22.0"
   },
   "dependencies": {
+    "easyqrcodejs": "^4.4.13",
     "vue": "^3.2.39"
   }
 }

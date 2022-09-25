@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import useBoolean from "./index";
+import useBoolean from ".";
 
 it("useBoolean", () => {
   const { v, setTrue, setFalse, toggle } = useBoolean(true);
