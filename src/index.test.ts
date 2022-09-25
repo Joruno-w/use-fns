@@ -1,5 +1,52 @@
 import { describe, expect, it } from "vitest";
+import { resolve } from "node:path";
 import * as fns from ".";
+
+describe.skip("Get All Export keys", () => {
+  it("exports", async () => {
+    expect(Object.keys(await import(resolve(__dirname, "./index.ts"))))
+      .toMatchInlineSnapshot(`
+        [
+          "useBoolean",
+          "useToggle",
+          "default",
+          "useTypeOf",
+          "useDebounce",
+          "useThrottle",
+          "useHideMobile",
+          "useLaunchFullscreen",
+          "useExitFullscreen",
+          "useTurnCase",
+          "useSearchParams",
+          "useSysType",
+          "useUniqueArrObj",
+          "useScrollToTop",
+          "useSmoothScroll",
+          "useUUID",
+          "useMoneyFormat",
+          "useLocalCache",
+          "useSessionCache",
+          "useFuzzyQuery",
+          "useForeachTree",
+          "useCharacterCount",
+          "useIsEmptyObj",
+          "useDelay",
+          "useDaysBetween",
+          "useRedirect",
+          "useTouchSupported",
+          "useInsertHTMLAfter",
+          "useShuffle",
+          "useGetSelectedText",
+          "useGetRandomBoolean",
+          "useSum",
+          "useAverage",
+          "useIsUrl",
+          "useGithubUrlFromGit",
+          "useIsScoped",
+        ]
+      `);
+  });
+});
 
 describe.concurrent("test each function output", () => {
   it("useCharacterCount", () => {
