@@ -1,7 +1,6 @@
 import qrcode from "easyqrcodejs";
 import { ref, unref, watch } from "vue";
 import { MaybeRef } from "../types";
-
 interface QRCodeOptions {
   onRenderingStart?: (qrCodeOptions: any) => void;
   onRenderingEnd?: (qrCodeOptions: any, dataURL: string) => void;
