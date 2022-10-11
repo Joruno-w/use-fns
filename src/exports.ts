@@ -10,13 +10,13 @@ for (const [, , name] of regIterator) {
   str += `\n  ${name},`;
 }
 
-const exportsName = "pkg";
+const exportsName = "pkgs";
 
 const allExports = `{ ${str.substring(0, str.length - 1)} \n}`;
 
 (async () => {
   if (content.includes(exportsName)) {
-    const res = content.replace(/const pkg [\s\S]+/, "");
+    const res = content.replace(/const pkgs [\s\S]+/, "");
     await fs.writeFile(filename, res);
   }
   await fs.writeFile(filename, `const ${exportsName} = ${allExports}\n\n`, {

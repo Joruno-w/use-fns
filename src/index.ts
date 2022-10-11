@@ -355,7 +355,8 @@ const useIsScoped = (s: string):boolean => {
 
 export * from './vue'
 
-const pkg = { 
+
+const pkgs = { 
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -391,7 +392,7 @@ const pkg = {
   useIsScoped 
 }
 
-export default pkg
+export default pkgs
 
 export { 
   useTypeOf,
