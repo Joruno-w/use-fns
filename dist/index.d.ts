@@ -1,3 +1,4 @@
+import * as vue from 'vue';
 import { Ref } from 'vue';
 
 interface Ele extends Element {
@@ -32,6 +33,12 @@ interface UseToggleReturn<T> {
     toggle: (v?: any) => void;
 }
 declare function useToggle<T extends any>(arr: MaybeRef<T>[], order?: orderType, start?: number, end?: number): UseToggleReturn<T>;
+
+interface QRCodeOptions {
+    onRenderingStart?: (qrCodeOptions: any) => void;
+    onRenderingEnd?: (qrCodeOptions: any, dataURL: string) => void;
+}
+declare const useQRCode: (text: MaybeRef<string>, options?: QRCodeOptions) => vue.Ref<string>;
 
 declare const useTypeOf: (obj: any) => string;
 declare const useDebounce: (cb: () => void, wait?: number) => () => void;
@@ -78,8 +85,10 @@ declare const useIsUrl: (url: string, { lenient }?: {
 }) => boolean;
 declare const useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
 declare const useIsScoped: (s: string) => boolean;
+declare const useArrayMoveMutable: (arr: unknown[], fromIndex: number, toIndex: number) => void;
+declare const useArrayMoveImmutable: (arr: unknown[], fromIndex: number, toIndex: number) => unknown[];
 
-declare const pkg: {
+declare const pkgs: {
     useTypeOf: (obj: any) => string;
     useDebounce: (cb: () => void, wait?: number) => () => void;
     useThrottle: (cb: () => void, wait?: number) => () => void;
@@ -115,6 +124,8 @@ declare const pkg: {
     }) => boolean;
     useGithubUrlFromGit: (url: string, opts?: Record<string, any>) => string;
     useIsScoped: (s: string) => boolean;
+    useArrayMoveMutable: (arr: unknown[], fromIndex: number, toIndex: number) => void;
+    useArrayMoveImmutable: (arr: unknown[], fromIndex: number, toIndex: number) => unknown[];
 };
 
-export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkgs as default, useArrayMoveImmutable, useArrayMoveMutable, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useQRCode, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };

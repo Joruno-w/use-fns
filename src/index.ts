@@ -1,9 +1,4 @@
-import type {
-  Doc,
-  Ele,
-  QuerySelector,
-  MoneyFormatParams,
-} from "./types";
+import type { Doc, Ele, QuerySelector, MoneyFormatParams } from "./types";
 
 // 判断变量类型
 const useTypeOf = (obj: any) => {
@@ -224,7 +219,7 @@ const useFuzzyQuery = <T extends Record<string, any>, K extends keyof T>(
   keyWord: string,
   attr: K
 ): T[] => {
-  const reg = new RegExp(keyWord,'i');
+  const reg = new RegExp(keyWord, "i");
   return list.reduce(
     (acc, item) => (reg.test(item[attr]), acc.push(item), acc),
     [] as T[]
@@ -341,7 +336,7 @@ const useGithubUrlFromGit = (
 };
 
 // 返回验证npm scoped的正则
-const scopedRegex = (options: { exact?: boolean } = {}) : RegExp => {
+const scopedRegex = (options: { exact?: boolean } = {}): RegExp => {
   const regex = "@[a-z\\d][\\w-.]+/[a-z\\d][\\w-.]*";
   return options && options.exact
     ? new RegExp(`^${regex}$`, "i")
@@ -349,12 +344,37 @@ const scopedRegex = (options: { exact?: boolean } = {}) : RegExp => {
 };
 
 // 检测字符串是不是npm scoped
-const useIsScoped = (s: string):boolean => {
+const useIsScoped = (s: string): boolean => {
   return scopedRegex({ exact: true }).test(s);
 };
 
-export * from './vue'
+// 数组内交换元素（修改原数组）
+const useArrayMoveMutable = (
+  arr: unknown[],
+  fromIndex: number,
+  toIndex: number
+) => {
+  const n = arr.length;
+  fromIndex = fromIndex < 0 ? fromIndex + n : fromIndex;
+  if (fromIndex >= 0 && fromIndex < n) {
+    toIndex = toIndex < 0 ? toIndex + n : toIndex;
+    const [from] = arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, from);
+  }
+};
 
+// 数组内交换元素（纯函数）
+const useArrayMoveImmutable = (
+  arr: unknown[],
+  fromIndex: number,
+  toIndex: number
+): unknown[] => {
+  const newArr = [...arr];
+  useArrayMoveMutable(newArr, fromIndex, toIndex);
+  return newArr;
+};
+
+export * from "./vue";
 
 const pkgs = { 
   useTypeOf,
@@ -389,7 +409,9 @@ const pkgs = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useIsScoped 
+  useIsScoped,
+  useArrayMoveMutable,
+  useArrayMoveImmutable 
 }
 
 export default pkgs
@@ -427,6 +449,8 @@ export {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useIsScoped 
+  useIsScoped,
+  useArrayMoveMutable,
+  useArrayMoveImmutable 
 } 
 

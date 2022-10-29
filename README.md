@@ -2,7 +2,7 @@
 
 Some utility functions prefixed with use
 
-[![NPM version](https://img.shields.io/badge/npm-1.0.25-brightgreen)](https://www.npmjs.com/package/use-fns) ![](https://img.shields.io/badge/WIP-blue)
+[![NPM version](https://img.shields.io/badge/npm-1.0.27-brightgreen)](https://www.npmjs.com/package/use-fns) ![](https://img.shields.io/badge/WIP-blue)
 ## Install
 
 ```
@@ -556,6 +556,34 @@ declare function useIsScoped(s: string): boolean;
 import { useIsScoped } from "use-fns";
 useIsScoped('@joruno/use-fns') // true
 useIsScoped('joruno/use-fns') // false
+```
+
+### useArrayMoveMutable
+
+Swap two elements of an array (mutable)
+
+```ts
+declare function useArrayMoveMutable(arr: unknow[],fromIndex: number,toIndex: number): void;
+```
+
+```ts
+import { useArrayMoveMutable } from "use-fns";
+useArrayMoveMutable([1,2,3],0,2) // [3,2,1]
+useArrayMoveMutable([1,2,3],0,-2) // [2,1,3]
+```
+
+### useArrayMoveImmutable
+
+Swap two elements of an array (immutable)
+
+```ts
+declare function useArrayMoveImmutable(arr: unknow[],fromIndex: number,toIndex: number): void;
+```
+
+```ts
+import { useArrayMoveImmutable } from "use-fns";
+useArrayMoveImmutable([1,2,3],0,2) // [3,2,1]
+useArrayMoveImmutable([1,2,3],0,-2) // [2,1,3]
 ```
 
 ## License

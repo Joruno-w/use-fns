@@ -3,6 +3,11 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 const vue = require('vue');
+const qrcode = require('easyqrcodejs');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e["default"] : e; }
+
+const qrcode__default = /*#__PURE__*/_interopDefaultLegacy(qrcode);
 
 const paramsSymbol = Symbol("paramsSymbol");
 function useToggle(arr, order = "asc", start = 0, end = arr.length) {
@@ -48,6 +53,19 @@ function useBoolean(value = false) {
     toggle
   };
 }
+
+const useQRCode = (text, options) => {
+  const qc = vue.ref("");
+  const Qrcode = new qrcode__default(document.createElement("div"), {
+    text: vue.unref(text),
+    onRenderingEnd(qrCodeOptions, dataURL) {
+      qc.value = dataURL;
+      options?.onRenderingEnd?.(qrCodeOptions, dataURL);
+    }
+  });
+  vue.watch(vue.ref(text), () => Qrcode.makeCode(qc.value));
+  return qc;
+};
 
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -275,7 +293,21 @@ const scopedRegex = (options = {}) => {
 const useIsScoped = (s) => {
   return scopedRegex({ exact: true }).test(s);
 };
-const pkg = {
+const useArrayMoveMutable = (arr, fromIndex, toIndex) => {
+  const n = arr.length;
+  fromIndex = fromIndex < 0 ? fromIndex + n : fromIndex;
+  if (fromIndex >= 0 && fromIndex < n) {
+    toIndex = toIndex < 0 ? toIndex + n : toIndex;
+    const [from] = arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, from);
+  }
+};
+const useArrayMoveImmutable = (arr, fromIndex, toIndex) => {
+  const newArr = [...arr];
+  useArrayMoveMutable(newArr, fromIndex, toIndex);
+  return newArr;
+};
+const pkgs = {
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -308,10 +340,14 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useIsScoped
+  useIsScoped,
+  useArrayMoveMutable,
+  useArrayMoveImmutable
 };
 
-exports["default"] = pkg;
+exports["default"] = pkgs;
+exports.useArrayMoveImmutable = useArrayMoveImmutable;
+exports.useArrayMoveMutable = useArrayMoveMutable;
 exports.useAverage = useAverage;
 exports.useBoolean = useBoolean;
 exports.useCharacterCount = useCharacterCount;
@@ -332,6 +368,7 @@ exports.useIsUrl = useIsUrl;
 exports.useLaunchFullscreen = useLaunchFullscreen;
 exports.useLocalCache = useLocalCache;
 exports.useMoneyFormat = useMoneyFormat;
+exports.useQRCode = useQRCode;
 exports.useRedirect = useRedirect;
 exports.useScrollToTop = useScrollToTop;
 exports.useSearchParams = useSearchParams;

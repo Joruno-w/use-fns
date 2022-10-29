@@ -1,4 +1,5 @@
-import { unref, ref } from 'vue';
+import { unref, ref, watch } from 'vue';
+import qrcode from 'easyqrcodejs';
 
 const paramsSymbol = Symbol("paramsSymbol");
 function useToggle(arr, order = "asc", start = 0, end = arr.length) {
@@ -44,6 +45,19 @@ function useBoolean(value = false) {
     toggle
   };
 }
+
+const useQRCode = (text, options) => {
+  const qc = ref("");
+  const Qrcode = new qrcode(document.createElement("div"), {
+    text: unref(text),
+    onRenderingEnd(qrCodeOptions, dataURL) {
+      qc.value = dataURL;
+      options?.onRenderingEnd?.(qrCodeOptions, dataURL);
+    }
+  });
+  watch(ref(text), () => Qrcode.makeCode(qc.value));
+  return qc;
+};
 
 const useTypeOf = (obj) => {
   return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -271,7 +285,21 @@ const scopedRegex = (options = {}) => {
 const useIsScoped = (s) => {
   return scopedRegex({ exact: true }).test(s);
 };
-const pkg = {
+const useArrayMoveMutable = (arr, fromIndex, toIndex) => {
+  const n = arr.length;
+  fromIndex = fromIndex < 0 ? fromIndex + n : fromIndex;
+  if (fromIndex >= 0 && fromIndex < n) {
+    toIndex = toIndex < 0 ? toIndex + n : toIndex;
+    const [from] = arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, from);
+  }
+};
+const useArrayMoveImmutable = (arr, fromIndex, toIndex) => {
+  const newArr = [...arr];
+  useArrayMoveMutable(newArr, fromIndex, toIndex);
+  return newArr;
+};
+const pkgs = {
   useTypeOf,
   useDebounce,
   useThrottle,
@@ -304,7 +332,9 @@ const pkg = {
   useAverage,
   useIsUrl,
   useGithubUrlFromGit,
-  useIsScoped
+  useIsScoped,
+  useArrayMoveMutable,
+  useArrayMoveImmutable
 };
 
-export { pkg as default, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
+export { pkgs as default, useArrayMoveImmutable, useArrayMoveMutable, useAverage, useBoolean, useCharacterCount, useDaysBetween, useDebounce, useDelay, useExitFullscreen, useForeachTree, useFuzzyQuery, useGetRandomBoolean, useGetSelectedText, useGithubUrlFromGit, useHideMobile, useInsertHTMLAfter, useIsEmptyObj, useIsScoped, useIsUrl, useLaunchFullscreen, useLocalCache, useMoneyFormat, useQRCode, useRedirect, useScrollToTop, useSearchParams, useSessionCache, useShuffle, useSmoothScroll, useSum, useSysType, useThrottle, useToggle, useTouchSupported, useTurnCase, useTypeOf, useUUID, useUniqueArrObj };
