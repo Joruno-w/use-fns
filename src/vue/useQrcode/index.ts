@@ -8,7 +8,6 @@ interface QRCodeOptions {
 
 const useQRCode = (text: MaybeRef<string>, options?: QRCodeOptions) => {
   const qc = ref<string>("");
-
   const Qrcode = new qrcode(document.createElement("div"), {
     text: unref(text),
     onRenderingEnd(qrCodeOptions: any, dataURL: string) {
