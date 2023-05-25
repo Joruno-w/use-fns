@@ -588,4 +588,4 @@ useArrayMoveImmutable([1,2,3],0,-2) // [2,1,3]
 
 ## License
 
-[MIT](./LICENSE) License © 2022 [Joruno-w](https://github.com/Joruno-w)
+[MIT](./LICENSE) License © 2023 [Joruno-w](https://github.com/Joruno-w)
